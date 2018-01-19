@@ -1,0 +1,32 @@
+{{!-- The tag below means - insert everything in this file into the {body} of the default.hbs template --}}
+{{!< default}}
+
+{{!-- The main content area --}}
+<main id="content" role="main">
+	{{#get "posts" filter="featured:true"}}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="swiper-container">
+    				<div class="swiper-wrapper">
+						{{#foreach posts}}
+							{{> "loop-featured"}}
+					    {{/foreach}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{/get}}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="loop">
+					{{#foreach posts}}
+						{{> "loop"}}
+				    {{/foreach}}
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

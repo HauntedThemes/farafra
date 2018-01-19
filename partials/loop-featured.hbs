@@ -1,0 +1,35 @@
+<article class="{{post_class}} swiper-slide">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box-content">
+                <h2 class="post-title"><a href="{{url}}" title="{{title}}">{{title}}</a></h2>
+                <div class="post-meta">
+                    <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
+                    <div class="author-name">— by {{author}}</div>
+                </div>
+                <i class="line-t"></i> <i class="line-v"></i> <i class="line-b"></i>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box-img">
+                {{#if feature_image}}
+                    <a href="{{url}}" title="{{title}}" class="img-holder">
+                        <span style="background-image: url({{img_url feature_image}})"></span>
+                    </a>
+                {{else}}
+                    <p class="excerpt">{{excerpt}} [...]</p>
+                {{/if}}
+                {{#if tags}}
+                    <ul class="tags">
+                    {{#foreach tags}}
+                        <li>
+                            <a href="{{url}}" title="{{name}}" class="tag tag-{{id}} {{slug}}">{{name}}</a>
+                        </li>  
+                    {{/foreach}}
+                    </ul>
+                {{/if}}
+                <i class="line-t"></i> <i class="line-v"></i> <i class="line-b"></i>
+            </div>
+        </div>
+    </div>
+</article>
