@@ -417,7 +417,7 @@ h1.post-title span{
 }
 
 .post-content{
-   padding: 80px 100px;
+   padding: 80px 100px 220px 100px;
     background: #fff;
     margin-top: -80px;
     z-index: 2;
@@ -483,15 +483,207 @@ h1.post-title span{
 .post-content-container .line-r{
     top: 0;
     bottom: auto;
-    right: 20px;
+    right: 35px;
     width: 1px;
     height: calc(100% - 20px);
+    left: auto;
 }
 
 .post-content-container .line-l{
     bottom: auto;
     width: 1px;
     height: calc(100% - 20px);
+    top: 0;
+    left: 35px;
+}
+
+.post-content-container .line-b{
+    left: 35px;
+    width: calc(100% - 70px);
+}
+
+.author{
+    border: 1px solid #CCCCCC;
+    max-width: 400px;
+    width: 100%;
+    display: inline-block;
+    text-align: left;
+    padding: 50px 30px 50px 80px;
+    background-color: #fff;
+    position: relative;
+    margin-top: -150px;
+    z-index: 12;
+}
+
+.author h3{
+    font-size: 15px;
+    line-height: 18px;
+    font-weight: bold;
+    position: relative;
+}
+
+.author h3:before{
+    content: '—';
+    position: absolute;
+    top: 0px;
+    left: -20px;
+    font-size: 15px;
+}
+
+.author p{
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 21px;
+}
+
+.author .author-image{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 30px;
+    left: -30px;
+    margin: 0;
+    z-index: 2;
+}
+
+.author .author-image img{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border-radius: 50%;
+}
+
+.author .author-content{
+    position: relative;
+    z-index: 2;
+}
+
+.author .author-meta{
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 21px;
+}
+
+.author .author-meta a{
+    margin-right: 15px;
+}
+
+.comments-trigger{
+    border: 1px solid #CCCCCC;
+    background-color: #fff;
+    width: 60px;
+    height: 60px;
+    font-size: 18px;
+    border-radius: 50%;
+    display: block;
+    text-align: center;
+    line-height: 60px;
+    position: absolute;
+    bottom: -10px;
+    z-index: 22;
+    margin-left: 100px;
+}
+
+.comments{
+    border: 1px solid #CCCCCC;
+    padding: 100px;
+    margin: 100px 0;
+    display: none;
+}
+
+.comments.active{
+    display: block;
+}
+
+.author-template .author{
+    margin: 50px 0 50px;
+    max-width: 100%;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    border: none;
+}
+
+.author-template .author .line-t,
+.author-template .author .line-b,
+.author-template .author .line-l,
+.author-template .author .line-r{
+    height: 1px;
+    top: 20px;
+    z-index: 10;
+    left: 20px;
+    width: calc(100% - 40px);
+    position: absolute;
+    background: #ccc;
+}
+
+.author-template .author .line-b{
+    top: auto;
+    bottom: 20px;
+}
+
+.author-template .author .line-l,
+.author-template .author .line-r{
+    width: 1px;
+    height: calc(100% - 40px);
+}
+
+.author-template .author .line-r{
+    left: auto;
+    right: 20px;
+}
+
+.author-template .author .author-image{
+    top: 80px;
+    left: -10px;
+    z-index: 22;
+}
+
+.author-template .author h3{
+    font-size: 24px;
+}
+
+.author-template .author h3:before{
+    display: none;
+}
+
+.horz-accordion ul {
+  list-style: none;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.horz-accordion ul li {
+  float: left;
+  width: 16.666%;
+  height: 600px;
+  opacity: 0.4;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.horz-accordion ul li:hover, .horz-accordion ul li:first-child ~ li:last-child {
+  width: 50%;
+  opacity: 1;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+.horz-accordion ul li:hover ~ li:last-child {
+  width: 16.666%;
+  opacity: 0.4;
+}
+.horz-accordion ul li:nth-child(1) {
+  background: url("https://dl.dropbox.com/s/mbho5bqfofk6g99/pic.jpg") top center no-repeat;
+}
+.horz-accordion ul li:nth-child(2) {
+  background: url("https://dl.dropbox.com/s/kioimintl0v9l4d/pic.jpg") top right no-repeat;
+}
+.horz-accordion ul li:nth-child(3) {
+  background: url("https://dl.dropbox.com/s/7a60gndncwf81x8/pic.jpg") top center no-repeat;
+}
+.horz-accordion ul li:nth-child(4) {
+  background: url("https://dl.dropbox.com/s/nkwuv9jz8i99309/pic.jpg") top center no-repeat;
 }
 
 @media (min-width: 1200px){
