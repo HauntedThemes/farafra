@@ -647,43 +647,25 @@ h1.post-title span{
 }
 
 .horz-accordion ul {
-  list-style: none;
-  max-width: 1200px;
-  margin: 0 auto;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
 }
 .horz-accordion ul li {
-  float: left;
-  width: 16.666%;
-  height: 600px;
-  opacity: 0.4;
-  -moz-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  -webkit-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
+    flex: 1;
+    height: 600px;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
-.horz-accordion ul li:hover, .horz-accordion ul li:first-child ~ li:last-child {
-  width: 50%;
-  opacity: 1;
-  -moz-transition: all 0.5s ease-in-out;
-  -ms-transition: all 0.5s ease-in-out;
-  -webkit-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-}
-.horz-accordion ul li:hover ~ li:last-child {
-  width: 16.666%;
-  opacity: 0.4;
-}
-.horz-accordion ul li:nth-child(1) {
-  background: url("https://dl.dropbox.com/s/mbho5bqfofk6g99/pic.jpg") top center no-repeat;
-}
-.horz-accordion ul li:nth-child(2) {
-  background: url("https://dl.dropbox.com/s/kioimintl0v9l4d/pic.jpg") top right no-repeat;
-}
-.horz-accordion ul li:nth-child(3) {
-  background: url("https://dl.dropbox.com/s/7a60gndncwf81x8/pic.jpg") top center no-repeat;
-}
-.horz-accordion ul li:nth-child(4) {
-  background: url("https://dl.dropbox.com/s/nkwuv9jz8i99309/pic.jpg") top center no-repeat;
+.horz-accordion ul li:hover{
+    flex: 5;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
 }
 
 @media (min-width: 1200px){
