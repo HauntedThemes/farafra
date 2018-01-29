@@ -3,14 +3,16 @@
 
 {{!-- The main content area --}}
 <main id="content" role="main">
-	{{#get "posts" filter="featured:true"}}
+	{{#get "posts" filter="featured:true" limit="4"}}
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 		    	<div class="horz-accordion">
 					<ul>
 						{{#foreach posts}}
-							<li>{{> "loop-featured"}}</li>
+							<li {{#if @first}}class="active"{{/if}}>
+								{{> "loop-featured"}}
+							</li>
 					    {{/foreach}}
 					</ul>	
 				</div>

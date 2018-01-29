@@ -45,4 +45,18 @@ jQuery(document).ready(function($) {
         });
 
     };
+
+    $('.horz-accordion ul li').on('click', function(event) {
+        event.preventDefault();
+        $('.horz-accordion ul li').removeClass('active');
+        $(this).addClass('active');
+    });
+
+    $('.horz-accordion ul li .prev, .horz-accordion ul li .next').on('click', function(event) {
+        event.preventDefault();
+        var index = $(this).closest('li').index();
+        console.log(index);
+        $('.horz-accordion ul li').removeClass('active');
+
+    });
 });
