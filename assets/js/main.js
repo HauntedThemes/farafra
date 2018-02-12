@@ -26,8 +26,10 @@ jQuery(document).ready(function($) {
         $('.comments-trigger').on('click', function(event) {
             event.preventDefault();
 
+            $(this).toggleClass('active');
+
             if (!$('#disqus_thread').length) {
-	            $('.comments').append('<div id="disqus_thread"></div>').addClass('active');
+	            $('.comments').append('<div id="disqus_thread"></div>');
 
 	            var url = [location.protocol, '//', location.host, location.pathname].join('');
 	            var disqus_config = function () {
@@ -42,6 +44,13 @@ jQuery(document).ready(function($) {
 	            (d.head || d.body).appendChild(s);
 	            })();
             };
+
+            if (!$(this).hasClass('active')) {
+                $('.comments').removeClass('active');
+            }else{
+                $('.comments').addClass('active');
+            };
+
         });
 
     };
@@ -57,6 +66,27 @@ jQuery(document).ready(function($) {
         var index = $(this).closest('li').index();
         console.log(index);
         $('.horz-accordion ul li').removeClass('active');
-
     });
+
+    var time;
+
+    function changeSlideOnTime(time){
+        time = setTimeout(function(){ 
+            var index = $('.horz-accordion ul li.active').index();
+            var next = index + 2;
+            var length = $('.horz-accordion ul li').length;
+
+            if (next > length) {
+                next = 1;
+            };
+
+            $('.horz-accordion ul li').removeClass('active');
+            $('.horz-accordion ul li:nth-child('+ next +')').addClass('active');
+
+            changeSlideOnTime(time);
+        }, 5000);
+    }
+
+    changeSlideOnTime(time);
+
 });

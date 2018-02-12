@@ -124,6 +124,21 @@ a:hover{
     text-decoration: none;
 }
 
+input[type="text"],
+input[type="email"]{
+    color: #000;
+    font-size: 17px;
+    font-weight: bold;
+    line-height: 21px;
+    background: #fff;
+    padding: 7px 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: block;
+    border: 2px solid #000;
+    width: 100%;
+}
+
 h1{
     font-size: 38px;
 }
@@ -152,6 +167,14 @@ h1, h2, h3, h4, h5, h6{
     font-weight: bold;
     line-height: 1.4;
     margin-bottom: 20px;
+}
+
+.btn{
+    background: black;
+    border-radius: 0;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
 }
 
 .loop h2{
@@ -371,6 +394,15 @@ header .row .btns{
     padding-right: 50px;
 }
 
+header .row .btns a{
+    margin-left: 10px;
+}
+
+header .row .btns img{
+    width: 25px;
+    height: auto;
+}
+
 h1.post-title{
     font-size: 70px;
     font-weight: bold;
@@ -551,6 +583,7 @@ h1.post-title span{
     height: 100%;
     padding: 0;
     border-radius: 50%;
+    border: 1px solid #cccccc;
 }
 
 .author .author-content{
@@ -582,6 +615,10 @@ h1.post-title span{
     bottom: -10px;
     z-index: 22;
     margin-left: 100px;
+}
+
+.comments-trigger.active{
+    border: 1px solid #000000;
 }
 
 .comments{
@@ -786,6 +823,52 @@ h1.post-title span{
     position: absolute;
     top: calc(100% + 60px);
     right: 30px;
+}
+
+footer{
+    padding: 100px 0 25px;
+}
+
+footer .tags{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0;
+}
+
+footer .tags li{
+    display: inline-block;
+}
+
+footer .tags li a{
+    color: #FFFFFF; 
+    font-size: 17px;    
+    font-weight: bold;  
+    line-height: 21px;
+    background: #000;
+    padding: 9px 10px;
+    text-transform: uppercase;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+footer .tags li a:before{
+    content: '#';
+}
+
+footer .copyright{
+    margin-top: 100px;
+}
+
+.gh-signin{
+    position: relative;
+}
+
+.gh-signin .btn{
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 @media (min-width: 1200px){
