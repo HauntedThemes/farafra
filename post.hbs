@@ -82,6 +82,21 @@
                 </div>
             </div>
         </article>
+        {{#get "posts" limit="3" include="tags, author" filter="id:-{{comment_id}}+tag:{{primary_tag.slug}}"}}
+            {{#if posts}}
+                <div class="related-posts container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="loop">
+                                {{#foreach posts}}
+                                    {{> "loop"}}
+                                {{/foreach}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
+        {{/get}}
     </main>
 
 {{/post}}

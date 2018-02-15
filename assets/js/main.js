@@ -10,9 +10,6 @@ jQuery(document).ready(function($) {
 
     var config = {
         'share-selected-text': true,
-        'load-more': false,
-        'infinite-scroll': false,
-        'infinite-scroll-step': 3,
         'disqus-shortname': 'hauntedthemes-demo'
     };
 
@@ -64,7 +61,6 @@ jQuery(document).ready(function($) {
 
     $('.horz-accordion ul li').on('click', function(event) {
         if (!$(event.target).parent().hasClass('prev') && !$(event.target).parent().hasClass('next')) {
-            event.preventDefault();
             $('.horz-accordion ul li').removeClass('active');
             $(this).addClass('active');
         };

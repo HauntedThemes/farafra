@@ -273,7 +273,8 @@ h1, h2, h3, h4, h5, h6{
 
 .loop article .line-t,
 .loop article .line-b,
-.loop article .line-l{
+.loop article .line-l,
+.loop article .line-r{
     background-color: #ccc;
     position: absolute;
     top: 20px;
@@ -292,6 +293,14 @@ h1, h2, h3, h4, h5, h6{
     height: calc(100% - 40px);
     right: 20px;
     left: auto;
+}
+
+.loop article .line-r{
+    width: 1px;
+    height: calc(100% - 40px);
+    right: 20px;
+    left: auto;
+    display: none;
 }
 
 .loop article .box-content{
@@ -702,6 +711,7 @@ h1.post-title span{
     justify-content: center;
     flex-direction: row;
     border-right: 1px solid #fff;
+    max-width: 134px;
     -moz-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
@@ -734,6 +744,7 @@ h1.post-title span{
     cursor: pointer;
 }
 .horz-accordion ul li.active{
+    max-width: 100%;
     flex: 5;
     -moz-transition: all 0.5s ease-in-out;
     -ms-transition: all 0.5s ease-in-out;
@@ -797,7 +808,7 @@ h1.post-title span{
     font-weight: 300;
     line-height: 84px;
     position: absolute;
-    left: 30px;
+    left: 23px;
     color: #fff;
     z-index: 2;
     top: 100%;
@@ -945,16 +956,16 @@ header h5:before{
 }
 
 .modal h3{
-    font-size: 15px;
     letter-spacing: 5px;
-    color: #262626;
-    line-height: 20px;
     text-align: center;
     text-transform: uppercase;
     padding: 25px;
     border-bottom: 1px solid rgba(185, 178, 162, 0.15);
     margin: 0;
-    font-weight: normal;
+    font-size: 40px;
+    font-weight: bold;
+    line-height: 49px;
+    color: #262626;
 }
 
 .modal .modal-content{
@@ -1003,9 +1014,9 @@ header h5:before{
 }
 
 .list-box li a{
-    font-size: 40px;
+    font-size: 32px;
     font-weight: bold;
-    line-height: 49px;
+    line-height: 42px;
     color: #262626;
 }
 
@@ -1084,8 +1095,109 @@ header .modal .blog-logo{
     transform: scale(.8);
 }
 
+.pagination-container{
+    padding-bottom: 80px;
+    padding-top: 160px;
+    position: relative;
+}
+
+.pagination-container .page-number{
+    position: absolute;
+    color: #606060;
+    font-size: 14px;
+    letter-spacing: 4px;
+    line-height: 19px;
+    width: 100px;
+    left: 50%;
+    margin-left: -50px;
+    text-align: center;
+    bottom: 80px;
+}
+
+.pagination{
+    text-align: center;
+    text-transform: uppercase;
+    color: #B7B7B7;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pagination a{
+    color: #606060;
+    font-size: 14px;
+    letter-spacing: 4px;
+    line-height: 19px;
+}
+
+.pagination a.older-posts{
+    left: auto;
+    right: 0;
+}
+
+.related-posts{
+    margin-top: 100px;
+}
+
+.post-content img{
+    max-width: 100%;
+    margin: 50px auto;
+    display: block;
+}
+
+.bookmark-container .no-bookmarks{
+    font-size: 17px;
+    text-align: center;
+    margin: 100px;
+}
+
+.bookmark-container .no-bookmarks .circle{
+    border: 1px solid #000;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    margin: 0 2px -2px 2px;
+}
+
 @media (min-width: 1200px){
-    .container {
+    .container,
+    .container-fluid {
         max-width: 1440px;
+    }
+}
+
+@media (max-width: 1199px){
+    .loop article .box-img .excerpt{
+        font-size: 16px;
+        line-height: 28px;
+    }
+}
+
+@media (max-width: 991px) {
+    .loop h2{
+        font-size: 32px;
+        line-height: 42px;
+    }
+}
+
+@media (max-width: 767px) {
+    .main-container{
+        overflow: hidden;
+    }
+    .loop article .box-content{
+        margin-right: 0;
+        width: 100%;
+        padding: 60px 60px 60px 40px;
+    }
+    .loop article .box-content .line-r{
+        display: block;
+        right: 0;
+    }
+    .loop article .box-content .line-l{
+        left: 0;
+    }
+    .loop article .box-content .line-t, .loop article .box-content .line-b{
+        left: 0;
+        width: 100%;
     }
 }

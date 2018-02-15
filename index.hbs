@@ -5,7 +5,7 @@
 <main id="content" role="main">
 	{{#get "posts" filter="featured:true" limit="4"}}
 		{{#if posts}}
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
 			    	<div class="horz-accordion">
@@ -22,7 +22,7 @@
 		</div>
 		{{/if}}
 	{{/get}}
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="loop">
@@ -33,4 +33,5 @@
 			</div>
 		</div>
 	</div>
+	{{pagination}}
 </main>
