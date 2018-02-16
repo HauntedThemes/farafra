@@ -403,11 +403,12 @@ header .row .btns{
 }
 
 header .row .btns a{
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 header .row .btns img{
-    width: 25px;
+    width: 100%;
+    max-width: 25px;
     height: auto;
 }
 
@@ -825,7 +826,7 @@ h1.post-title span{
 
 .horz-accordion ul li .prev{
     position: absolute;
-    top: calc(100% + 20px);
+    top: calc(100% + 23px);
     left: 30px;
 }
 
@@ -1192,6 +1193,7 @@ header .modal .blog-logo{
     .loop article .box-content .line-r{
         display: block;
         right: 0;
+        left: auto;
     }
     .loop article .box-content .line-l{
         left: 0;
@@ -1199,5 +1201,66 @@ header .modal .blog-logo{
     .loop article .box-content .line-t, .loop article .box-content .line-b{
         left: 0;
         width: 100%;
+    }
+    .loop article .box-content .post-meta .author-name{
+        margin-top: 100px;
+    }
+    .loop article .box-img{
+        width: calc(100% + 30px);
+    }
+    .loop article{
+        height: auto;
+    }
+    .loop article .line-l,
+    .loop article .line-r{
+        top: 15px;
+        height: calc(100% - 30px);
+    }
+    .loop article .line-l{
+        right: 15px;
+    }
+    .loop article .line-b,
+    .loop article .line-t{
+        bottom: 15px;
+        width: calc(100% - 30px);
+        left: 15px;
+    }
+    .loop article .line-t{
+        top: 15px;
+        bottom: auto;
+    }
+    .loop article .line-r{
+        display: block;
+        right: auto;
+        left: 15px;
+    }
+    .loop article .box-img .excerpt{
+        padding-left: 60px;
+    }
+    .loop article:nth-child(2n) .box-content{
+        margin-left: 0;
+    }
+    .loop article .box-img{
+        min-height: 300px;
+    }
+    .loop article:nth-child(2n) .box-content .line-t, .loop article:nth-child(2n) .box-content .line-b{
+        right: 0;
+    }
+    .loop article:nth-child(2n) .box-content .line-l{
+        right: auto;
+        left: 0;
+    }
+    .loop article:nth-child(2n) .box-img{
+        margin-left: -15px;
+    }
+    .loop article:nth-child(2n) .box-img .line-t, .loop article:nth-child(2n) .box-img .line-b{
+        left: 15px;
+    }
+    .loop article:nth-child(2n) .box-img .line-r{
+        left: auto;
+        right: 15px;
+    }
+    .loop article:nth-child(2n) .box-img .line-l{
+        left: 15px;
     }
 }
