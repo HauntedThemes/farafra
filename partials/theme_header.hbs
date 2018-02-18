@@ -1,151 +1,77 @@
-        <header>
-            <div class="container">
-                <div class="row">
-                    <div class="col-6 ml-auto">
-                        <div class="blog-logo">
-                            <a href="{{@blog.url}}" title="{{@blog.title}}">
-                                {{#if @blog.logo}} <img src="{{@blog.logo}}" alt="{{@blog.title}}" /> {{else}}<span>{{@blog.title}}</span>{{/if}} 
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-6 text-right btns">
-                        <a href="#" class="search" data-toggle="modal" data-target="#search">
-                            <img src="{{asset "img/search.svg"}}">
-                        </a>
-                        <a href="#" class="bookmark" data-toggle="modal" data-target="#bookmark">
-                            <span class="counter hidden"></span>
-                            <img src="{{asset "img/bookmark.svg"}}">
-                        </a>
-                        <a href="#" class="menu" data-toggle="modal" data-target="#menu">
-                            <img src="{{asset "img/menu.svg"}}">
+        <header class="container">
+            <div class="row">
+                <div class="col-6 ml-auto">
+                    <div class="blog-logo">
+                        <a href="{{@blog.url}}" title="{{@blog.title}}">
+                            {{#if @blog.logo}} <img src="{{@blog.logo}}" alt="{{@blog.title}}" /> {{else}}<span>{{@blog.title}}</span>{{/if}} 
                         </a>
                     </div>
                 </div>
-            </div>           
-
-            <!-- Search Modal -->
-            <div class="modal fade-scale" id="search" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-6 ml-auto">
-                                        <div class="blog-logo">
-                                            <a href="{{@blog.url}}" title="{{@blog.title}}">
-                                                {{#if @blog.logo}} <img src="{{@blog.logo}}" alt="{{@blog.title}}" /> {{else}}<span>{{@blog.title}}</span>{{/if}} 
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-6 text-right btns">
-                                        <a href="#" data-dismiss="modal" aria-label="Close">
-                                            <svg width="23" height="21" viewBox="0 0 23 21" xmlns="http://www.w3.org/2000/svg"><g stroke="#B9B2A2" fill="none" fill-rule="evenodd" stroke-linecap="square"><path d="M21.4473684.55263158L1.17249143 20.8275086M1.5526316.55263158L21.82750857 20.8275086"/></g></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-10 offset-md-1">
-                                        <form class="search">
-                                            <input id="search-field" placeholder="Search" autocomplete="off"/>
-                                        </form>
-                                        <div id="results"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer"></div>
-                    </div>
+                <div class="col-6 text-right btns">
+                    <a href="#" class="search">
+                        <svg width="22" height="22" xmlns="http://www.w3.org/2000/svg"><path d="M8.372 13.745A5.378 5.378 0 0 1 3 8.372 5.378 5.378 0 0 1 8.372 3a5.378 5.378 0 0 1 5.373 5.372 5.379 5.379 0 0 1-5.373 5.373zm6.881-.614a8.322 8.322 0 0 0 1.492-4.759C16.745 3.756 12.99 0 8.372 0 3.756 0 0 3.756 0 8.372c0 4.617 3.756 8.373 8.372 8.373a8.323 8.323 0 0 0 4.76-1.493l6.151 6.152 2.121-2.12-6.15-6.153z" fill="#000" fill-rule="evenodd"/></svg>
+                    </a>
+                    <a href="#" class="bookmark">
+                        <span class="counter hidden"></span>
+                        <svg width="18" height="21" xmlns="http://www.w3.org/2000/svg"><path d="M0 0v20.682l8.809-8.251 8.81 8.25V0H0zm3 3h11.954v11.147L8.81 8.234 3 14.147V3.001z" fill="#000" fill-rule="evenodd"/></svg>
+                    </a>
+                    <a href="#" class="menu">
+                        <svg width="22" height="17" xmlns="http://www.w3.org/2000/svg"><g fill="#000" fill-rule="evenodd"><path d="M0 3h22V0H0zM0 10h22V7H0zM0 17h22v-3H0z"/></g></svg>
+                    </a>
                 </div>
             </div>
 
             <!-- Bookmark Modal -->
-            <div class="modal fade-scale" id="bookmark" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-6 ml-auto">
-                                        <div class="blog-logo">
-                                            <a href="{{@blog.url}}" title="{{@blog.title}}">
-                                                {{#if @blog.logo}} <img src="{{@blog.logo}}" alt="{{@blog.title}}" /> {{else}}<span>{{@blog.title}}</span>{{/if}} 
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 col-6 text-right btns">
-                                        <a href="#" data-dismiss="modal" aria-label="Close">
-                                            <svg width="23" height="21" viewBox="0 0 23 21" xmlns="http://www.w3.org/2000/svg"><g stroke="#B9B2A2" fill="none" fill-rule="evenodd" stroke-linecap="square"><path d="M21.4473684.55263158L1.17249143 20.8275086M1.5526316.55263158L21.82750857 20.8275086"/></g></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-10 offset-md-1">
-                                        <h3>Bookmarks</h3>
-                                        <div class="bookmark-container">
-                                            <p class="no-bookmarks">You haven't yet saved any bookmarks. To bookmark a post, just click <i class="circle"></i>.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer"></div>
+            <div id="bookmark">
+                <div class="bookmark-inner">
+                    <h3>Bookmarks</h3>
+                    <div class="bookmark-container">
+                        <p class="no-bookmarks">You haven't yet saved any bookmarks. To bookmark a post, just click <i class="circle"></i>.</p>
                     </div>
                 </div>
+                <a href="#" class="close">
+                    <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M11.649 0L6.885 4.765 2.122 0 0 2.12l4.764 4.764L0 11.648l2.122 2.12 4.763-4.762 4.764 4.763 2.12-2.121-4.762-4.763 4.762-4.764z" fill="#000" fill-rule="evenodd"/></svg>
+                </a>
+            </div>
+
+            <!-- Search Modal -->
+            <div id="search">
+                <div class="search-inner">
+                    <h3>Search</h3>
+                    <div class="search-container">
+                        <form>
+                            <input id="search-field" placeholder="Search" autocomplete="off"/>
+                        </form>
+                        <div id="results"></div>                   
+                    </div>
+                </div>
+                <a href="#" class="close">
+                    <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M11.649 0L6.885 4.765 2.122 0 0 2.12l4.764 4.764L0 11.648l2.122 2.12 4.763-4.762 4.764 4.763 2.12-2.121-4.762-4.763 4.762-4.764z" fill="#000" fill-rule="evenodd"/></svg>
+                </a>
             </div>
 
             <!-- Menu Modal -->
-            <div class="modal fade-scale" id="menu" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-6 ml-auto">
-                                        <div class="blog-logo">
-                                            <a href="{{@blog.url}}" title="{{@blog.title}}">
-                                                {{#if @blog.logo}} <img src="{{@blog.logo}}" alt="{{@blog.title}}" /> {{else}}<span>{{@blog.title}}</span>{{/if}} 
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 col-6 text-right btns">
-                                        <a href="#" data-dismiss="modal" aria-label="Close">
-                                            <svg width="23" height="21" viewBox="0 0 23 21" xmlns="http://www.w3.org/2000/svg"><g stroke="#B9B2A2" fill="none" fill-rule="evenodd" stroke-linecap="square"><path d="M21.4473684.55263158L1.17249143 20.8275086M1.5526316.55263158L21.82750857 20.8275086"/></g></svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        {{navigation}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <ul class="social">
-                                {{#if @blog.facebook}}
-                                    <li><a href="{{facebook_url}}" class="facebook" title="{{@blog.facebook}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                {{/if}}
-                                {{#if @blog.twitter}}
-                                    <li><a href="{{twitter_url}}" class="twitter" title="{{@blog.twitter}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                {{/if}}
-                                <li><a href="https://www.youtube.com/" class="youtube" title="Youtube" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
-                                <li><a href="https://www.instagram.com/" class="instagram" title="Instagram" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                <li><a href="{{@blog.url}}/rss"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
+            <div id="menu">
+                <div class="menu-inner">
+                    <h3>Menu</h3>
+                    <div class="menu-container">
+                        {{navigation}}
+                        <ul class="social">
+                            {{#if @blog.facebook}}
+                                <li><a href="{{facebook_url}}" class="facebook" title="{{@blog.facebook}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            {{/if}}
+                            {{#if @blog.twitter}}
+                                <li><a href="{{twitter_url}}" class="twitter" title="{{@blog.twitter}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            {{/if}}
+                            <li><a href="https://www.youtube.com/" class="youtube" title="Youtube" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.instagram.com/" class="instagram" title="Instagram" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="{{@blog.url}}/rss"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                        </ul>
                     </div>
                 </div>
+                <a href="#" class="close">
+                    <svg width="14" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M11.649 0L6.885 4.765 2.122 0 0 2.12l4.764 4.764L0 11.648l2.122 2.12 4.763-4.762 4.764 4.763 2.12-2.121-4.762-4.763 4.762-4.764z" fill="#000" fill-rule="evenodd"/></svg>
+                </a>
             </div>
+
         </header>

@@ -2,29 +2,35 @@
 
     <footer class="site-footer container">
         <div class="row">
-            <div class="col-md-10 mx-auto">
+            <div class="col-md-12">
                 <div class="footer-content">
                     <div class="row">
-                        <div class="col-md-5">
-                            <h3>Tags</h3>
-                            {{#get "tags" limit="all"}}
-                                <ul class="tags">
-                                    {{#foreach tags}}
-                                        <li>
-                                            <a href="{{url}}">{{name}}</a>
-                                        </li>
-                                    {{/foreach}}
-                                </ul>
-                            {{/get}}
+                        <div class="col-md-6">
+                            <div class="footer-tags">
+                                <h3>Tags</h3>
+                                {{#get "tags" limit="all"}}
+                                    <ul class="tags">
+                                        {{#foreach tags}}
+                                            <li>
+                                                <a href="{{url}}">{{name}}</a>
+                                            </li>
+                                        {{/foreach}}
+                                    </ul>
+                                {{/get}}
+                                <i class="line-t"></i> <i class="line-r"></i> <i class="line-b"></i> <i class="line-l"></i>
+                            </div>
                         </div>
-                        <div class="col-md-5 ml-auto">
-                            <h3>Newsletter</h3>
-                            {{subscribe_form
-                                form_class="gh-signin"
-                                input_class="gh-input"
-                                button_class="btn"
-                                placeholder="Your email address"
-                            }}
+                        <div class="col-md-6">
+                            <div class="footer-newsletter">
+                                <h3>Newsletter</h3>
+                                {{subscribe_form
+                                    form_class="gh-signin"
+                                    input_class="gh-input"
+                                    button_class="btn"
+                                    placeholder="Your email address"
+                                }}
+                                <i class="line-t"></i> <i class="line-r"></i> <i class="line-b"></i> <i class="line-l"></i>
+                            </div>
                         </div>
                     </div>
                 </div>

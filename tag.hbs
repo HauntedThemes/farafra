@@ -4,8 +4,11 @@
 {{#tag}}
 <div class="container">
 	<div class="row">
-		<div class="col-lg-8 offset-lg-2 text-center tag-title">
-			<h1>{{name}}</h1>
+		<div class="col-md-12">
+			<div class="intro {{#if feature_image}}has-cover{{/if}}" {{#if feature_image}} style="background-image: url({{img_url feature_image}})" {{/if}}>
+				<h1>{{name}}</h1>
+				<i class="line-t"></i> <i class="line-r"></i> <i class="line-b"></i> <i class="line-l"></i>
+			</div>
 		</div>
 	</div>
 </div>

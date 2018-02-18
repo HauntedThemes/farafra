@@ -268,4 +268,48 @@ jQuery(document).ready(function($) {
         return arr;
     }
 
+    $("[data-toggle=popover]").popover({
+        html : true,
+        content: function() {
+            var content = $(this).attr("data-popover-content");
+            return $(content).children(".popover-body").html();
+        }
+    });
+
+    $('.bookmark').on('click', function(event) {
+        event.preventDefault();
+        $('#bookmark, .backdrop').toggleClass('active');
+    });
+
+    $('.search').on('click', function(event) {
+        event.preventDefault();
+        $('#search, .backdrop').toggleClass('active');
+        $('#search input').focus();
+    });
+
+    $('.backdrop').on('click', function(event) {
+        event.preventDefault();
+        $(this).removeClass('active');
+        $('#bookmark, #search, #menu').removeClass('active');
+    });
+
+    $('.menu').on('click', function(event) {
+        event.preventDefault();
+        $('#menu, .backdrop').toggleClass('active');
+    });
+
+    $('.close').on('click', function(event) {
+        event.preventDefault();
+        $('.backdrop').click();
+    });
+
+    // Execute on scroll
+    $(window).on('scroll', function(event) {
+        // Hide menu and search after scroll
+        var top = $(window).scrollTop();
+        if (top > (h/2)) {
+            $('.backdrop').click();
+        };
+    });
+
 });
