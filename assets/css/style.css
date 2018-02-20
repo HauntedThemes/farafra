@@ -177,9 +177,27 @@ h1, h2, h3, h4, h5, h6{
     text-transform: uppercase;
 }
 
+.main-container{
+    perspective: 1000px;
+}
+
 .loop h2{
     font-size: 40px;
     line-height: 49px;
+}
+
+.loop h2 a{
+    background-image: linear-gradient(180deg, transparent 65%, #cccccc 0);
+    background-repeat: no-repeat;
+    background-size: 0 100%;
+    -webkit-transition: background-size 0.3s ease-in-out;
+    -moz-transition: background-size 0.3s ease-in-out;
+    -o-transition: background-size 0.3s ease-in-out;
+    transition: background-size 0.3s ease-in-out;
+}
+
+.loop h2 a:hover{
+    background-size: 100% 100%;
 }
 
 .loop .post-date{
@@ -207,6 +225,7 @@ h1, h2, h3, h4, h5, h6{
     height: 100%;
     display: flex;
     width: 100%;
+    overflow: hidden;
 }
 
 .loop article .img-holder span{
@@ -214,6 +233,14 @@ h1, h2, h3, h4, h5, h6{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
+.loop article .img-holder:hover span{
+    transform: scale(1.1);
 }
 
 .loop article .tags{
@@ -242,8 +269,18 @@ h1, h2, h3, h4, h5, h6{
     display: inline-block;
 }
 
+.loop article .tags li a:hover{
+    transform: translateX(-5px);
+    color: #000;
+    background: #ccc;
+}
+
 .loop article .tags li a:before{
     content: '# ';
+}
+
+.loop article:nth-child(2n) .tags li a:hover{
+    transform: translateX(5px);
 }
 
 .loop article:nth-child(2n) .tags{
@@ -338,6 +375,10 @@ h1, h2, h3, h4, h5, h6{
 
 .loop article .box-content .post-meta .author-name a{
     color: #CCCCCC;
+}
+
+.loop article .box-content .post-meta .author-name a:hover{
+    color: #000;
 }
 
 .loop article .box-content .line-t,
@@ -828,6 +869,18 @@ h1.post-title span{
 .horz-accordion ul li.active article h2{
     opacity: 1;
 }
+.horz-accordion ul li article h2 a{
+    background-image: linear-gradient(180deg, transparent 65%, #cccccc 0);
+    background-repeat: no-repeat;
+    background-size: 0 100%;
+    -webkit-transition: background-size 0.3s ease-in-out;
+    -moz-transition: background-size 0.3s ease-in-out;
+    -o-transition: background-size 0.3s ease-in-out;
+    transition: background-size 0.3s ease-in-out;
+}
+.horz-accordion ul li article h2 a:hover{
+    background-size: 100% 100%;
+}
 .horz-accordion ul li article .post-meta{
     font-size: 15px;
     color: #CCCCCC;
@@ -874,10 +927,22 @@ h1.post-title span{
     left: 30px;
 }
 
+.horz-accordion ul li .prev:hover{
+    transform: translateX(-5px); 
+}
+
 .horz-accordion ul li .next{
     position: absolute;
     top: calc(100% + 60px);
     right: 30px;
+}
+
+.horz-accordion ul li .next svg{
+    pointer-events: none;
+}
+
+.horz-accordion ul li .next:hover{
+    transform: translateX(5px); 
 }
 
 footer .col-md-6:first-child{
@@ -949,6 +1014,11 @@ footer .tags li a{
 
 footer .tags li a:before{
     content: '#';
+}
+
+footer .tags li a:hover{
+    color: #000;
+    background: #ccc;
 }
 
 footer .footer-newsletter .line-t,
@@ -1040,11 +1110,20 @@ header h5:before{
     width: 100%;
     height: 100%;
     z-index: 99;
-    display: none;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 .backdrop.active{
-    display: block;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .fade-scale {
@@ -1127,6 +1206,17 @@ header h5:before{
     font-weight: bold;
     line-height: 42px;
     color: #262626;
+    background-image: linear-gradient(180deg, transparent 65%, #cccccc 0);
+    background-repeat: no-repeat;
+    background-size: 0 100%;
+    -webkit-transition: background-size 0.3s ease-in-out;
+    -moz-transition: background-size 0.3s ease-in-out;
+    -o-transition: background-size 0.3s ease-in-out;
+    transition: background-size 0.3s ease-in-out;
+}
+
+.list-box li a:hover{
+    background-size: 100% 100%;
 }
 
 header .blog-logo{
@@ -1249,6 +1339,14 @@ header .modal .blog-logo{
     line-height: 19px;
 }
 
+.pagination a.older-posts:hover{
+    transform: translateX(-5px);
+}
+
+.pagination a.newer-posts:hover{
+    transform: translateX(5px);
+}
+
 .related-posts{
     margin-top: 100px;
 }
@@ -1290,7 +1388,6 @@ header .modal .blog-logo{
 }
 
 #bookmark{
-    display: none;
     position: absolute;
     top: 0;
     left: 15px;
@@ -1299,10 +1396,20 @@ header .modal .blog-logo{
     width: calc(100% - 30px);
     padding: 20px;
     min-height: 50vh;
+    visibility: hidden;
+    pointer-events: none;
+    display: flex;
+    transform: translateY(-110%) rotateX(-15deg) scale(.95);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 #bookmark.active{
-    display: flex;
+    transform: translateY(0) rotateX(0deg) scale(1);
+    visibility: visible;
+    pointer-events: auto;
 }
 
 #bookmark .bookmark-inner{
@@ -1348,7 +1455,7 @@ header .modal .blog-logo{
 }
 
 #search{
-    display: none;
+    display: flex;
     position: absolute;
     top: 0;
     left: 15px;
@@ -1358,10 +1465,19 @@ header .modal .blog-logo{
     padding: 20px;
     min-height: 340px;
     max-height: 100vh;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-110%) rotateX(-15deg) scale(.95);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 #search.active{
-    display: flex;
+    transform: translateY(0) rotateX(0deg) scale(1);
+    visibility: visible;
+    pointer-events: auto;
 }
 
 #search .search-inner{
@@ -1381,7 +1497,6 @@ header .modal .blog-logo{
 }
 
 #menu{
-    display: none;
     position: absolute;
     top: 0;
     left: 15px;
@@ -1391,10 +1506,20 @@ header .modal .blog-logo{
     padding: 20px;
     min-height: 340px;
     max-height: 100vh;
+    visibility: hidden;
+    pointer-events: none;
+    display: flex;
+    transform: translateY(-110%) rotateX(-15deg) scale(.95);
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 #menu.active{
-    display: flex;
+    transform: translateY(0) rotateX(0deg) scale(1);
+    visibility: visible;
+    pointer-events: auto;
 }
 
 #menu .menu-inner{
@@ -1507,6 +1632,42 @@ header .modal .blog-logo{
 
 .tag-template h1:before{
     content: '#';
+}
+
+
+/* ==========================================================================
+   6. Subscribe
+   ========================================================================== */
+
+.subscribe .social{
+    font-size: 22px;
+    line-height: 29px;
+    font-weight: 200;
+    margin: 50px 0;
+}
+
+.subscribe .social a{
+    margin: 0 5px;
+    padding: 5px;
+}
+
+.subscribe .post-title{
+    margin-bottom: 50px;
+    margin-top: 0;
+}
+
+.subscribe .or {
+    display: block;
+    margin: 50px 0;
+}
+
+.subscribe #content {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
 }
 
 @media (min-width: 1200px){
