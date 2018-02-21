@@ -439,7 +439,6 @@ h1, h2, h3, h4, h5, h6{
 }
 
 header{
-    min-height: 100px;
     display: flex;
     position: relative;
 }
@@ -998,11 +997,11 @@ h1.post-title span{
     }
 }
 
-footer .col-md-6:first-child{
+footer .col-lg-6:first-child{
     padding-right: 0;
 }
 
-footer .col-md-6:last-child{
+footer .col-lg-6:last-child{
     padding-left: 0;
 }
 
@@ -1013,7 +1012,7 @@ footer .line-r{
     background: #000;
 }
 
-footer .footer-content .col-md-6{
+footer .footer-content .col-lg-6{
     display: flex;
 }
 
@@ -1765,6 +1764,9 @@ body.active #menu.active{
         font-size: 39px;
         line-height: 54px;
     }
+    .site-footer{
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 991px) {
@@ -1775,6 +1777,13 @@ body.active #menu.active{
 }
 
 @media (max-width: 767px) {
+    #menu,
+    #search,
+    #bookmark{
+        left: 0;
+        height: 100vh;
+        width: 100%;
+    }
     #content .horz-accordion{
         margin-bottom: 50px;
         margin-left: -15px;
