@@ -4,9 +4,11 @@
             <div class="box-content">
                 <div class="feature-img" style="background-image: url({{img_url feature_image}})"></div>
                 <span class="nr">0{{@number}}</span>
-                <h2 class="post-title"><a href="{{url}}" title="{{title}}">{{title}}</a></h2>
-                <div class="post-meta">
-                    <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
+                <div class="box-content-inner">
+                    <h2 class="post-title"><a href="{{url}}" title="{{title}}">{{title}}</a></h2>
+                    <div class="post-meta">
+                        <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
+                    </div>
                 </div>
                 <a href="#" class="prev">
                     <svg width="26" height="16" viewBox="0 0 26 16" xmlns="http://www.w3.org/2000/svg"><g stroke="#000" stroke-width="3" fill="none" fill-rule="evenodd"><path d="M9.95 1.06L3 8.01l6.95 6.95M3 8.01h23"/></g></svg>
@@ -14,6 +16,14 @@
                 <a href="#" class="next">
                     <svg width="26" height="16" viewBox="0 0 26 16" xmlns="http://www.w3.org/2000/svg"><g stroke="#000" stroke-width="3" fill="none" fill-rule="evenodd"><path d="M16.05 1.06L23 8.01l-6.95 6.95M23 8.01H0"/></g></svg>
                 </a>
+                <i class="loading-progress">
+                    <svg width="23" height="23" class="static">
+                        <circle class="outer" cx="178" cy="12" r="9" transform="rotate(-90, 95, 95)"></circle>
+                    </svg>
+                    <svg width="23" height="23" class="fill">
+                        <circle class="outer" cx="178" cy="12" r="9" transform="rotate(-90, 95, 95)"></circle>
+                    </svg>
+                </i>
             </div>
         </div>
     </div>

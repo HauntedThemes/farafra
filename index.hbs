@@ -8,10 +8,10 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-12">
-			    	<div class="horz-accordion">
-						<ul>
+			    	<div class="horz-accordion swiper-container">
+						<ul class="swiper-wrapper">
 							{{#foreach posts}}
-								<li {{#if @first}}class="active"{{/if}}>
+								<li class="swiper-slide {{#if @first}}swiper-slide-active{{/if}}">
 									{{> "loop-featured"}}
 								</li>
 						    {{/foreach}}
