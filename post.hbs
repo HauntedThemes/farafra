@@ -5,88 +5,86 @@
 {{#post}}
 
     <main id="content" role="main" data-id="{{comment_id}}">
-        <article class="{{post_class}}">
-            <div class="container">
+        <article class="{{post_class}} content-inner-post">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 post-cover-container">
                         <div class="post-cover post-meta {{#if feature_image}}has-image{{/if}}" {{#if feature_image}} style="background-image: url({{img_url feature_image}});"{{/if}}>
-                            <div class="row">
-                                <div class="col-md-8 ml-auto mr-auto">
-                                    <h1 class="post-title"><span>{{title}}</span></h1>
-                                    <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
-                                </div>
+                            <div class="post-cover-inner-container">
+                                <h1 class="post-title"><span>{{title}}</span></h1>
+                                <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
                             </div>
                             <i class="line-t"></i> <i class="line-l"></i> <i class="line-r"></i>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="container post-content-container">
-                <div class="row">
-                    <div class="col-md-8 ml-auto mr-auto">
-                        <section class="post-content">
-                            {{content}}
-                        </section>
-                    </div>
+            <div class="container-fluid post-content-container">
+                <div class="post-content-inner-container">
+                    <section class="post-content">
+                        {{content}}
+                
+                        {{#if tags}}
+                            <div class="tags">
+                            {{#foreach tags}}
+                                <a href="{{url}}" title="{{name}}" class="tag tag-{{id}} {{slug}}">{{name}}</a>
+                            {{/foreach}}
+                            </div>
+                        {{/if}}
+                        <div class="share-on">
+                            <p>Share on: </p>
+                            <a class="share-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}" onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;" title="Share on Facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                            <a class="share-twitter" href="https://twitter.com/share?text={{encode title}}&amp;url={{url absolute="true"}}" onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;" title="Share on Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <a href="https://plus.google.com/share?url={{url absolute="true"}}" title="Share on Google+"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                            <a href="https://www.reddit.com/submit?url={{url absolute="true"}}%2F&title={{encode title}}" title="Share on Reddit"><i class="fa fa-reddit-alien" aria-hidden="true"></i></a>
+                            <a href="mailto:?subject={{encode title}}&amp;body={{url absolute="true"}}" title="Share by Email"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                        </div>
+                    </section>
                 </div>
                 <i class="line-b"></i> <i class="line-l"></i> <i class="line-r"></i>
+                <a href="#" class="comments-trigger">
+                    <svg width="24" height="22" xmlns="http://www.w3.org/2000/svg"><path d="M19.963 13.01h-3v4.603l-4.602-4.603H3V3h16.963v10.01zM0 0v16.01h11.119l5.103 5.104a2.185 2.185 0 0 0 2.389.475 2.187 2.187 0 0 0 1.352-2.025V16.01h3.056V0H0z" fill="#000" fill-rule="evenodd"/></svg>
+                </a>
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 ml-auto mr-auto">
-                        <a href="#" class="comments-trigger">
-                            <svg width="24" height="22" xmlns="http://www.w3.org/2000/svg"><path d="M19.963 13.01h-3v4.603l-4.602-4.603H3V3h16.963v10.01zM0 0v16.01h11.119l5.103 5.104a2.185 2.185 0 0 0 2.389.475 2.187 2.187 0 0 0 1.352-2.025V16.01h3.056V0H0z" fill="#000" fill-rule="evenodd"/></svg>
-                        </a>
-                    </div>
-                </div>
+            <div class="container-fluid order-1">
+                {{#author}}
+                    <section class="author {{#if profile_image}}has-image{{/if}}">
+                        {{#if profile_image}}
+                        <figure class="author-image">
+                            <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
+                        </figure>
+                        {{/if}}
+
+                        <div class="author-content">
+                            <h3>
+                                by <a href="{{url}}">{{name}}</a>
+                            </h3>
+
+                            {{#if bio}}
+                                <p>{{bio}}</p>
+                            {{else}}
+                                <p>Read <a href="{{url}}">more posts</a> by this author.</p>
+                            {{/if}}
+
+                            <div class="author-meta">
+                                <span class="social">
+                                    {{#if twitter}}<a href="{{twitter_url}}" class="twitter" title="{{twitter}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>{{/if}}
+                                    {{#if facebook}}<a href="{{facebook_url}}" class="facebook" title="{{facebook}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>{{/if}}
+                                </span>
+                                {{#if website}}<span class="author-link"><a href="{{website}}" target="_blank" rel="noopener noreferrer" title="{{website}}"><i class="fa fa-link" aria-hidden="true"></i></a></span>{{/if}}
+                                {{#if location}}<span class="author-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{location}}</span>{{/if}}
+                            </div>
+                        </div>
+                    </section>
+                {{/author}}
             </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 ml-auto mr-auto text-right">
-                        {{#author}}
-                            <section class="author {{#if profile_image}}has-image{{/if}}">
-                                {{#if profile_image}}
-                                <figure class="author-image">
-                                    <a class="img" href="{{url}}" title="{{name}}"><img src="{{img_url profile_image}}" alt="{{name}}"></a>
-                                </figure>
-                                {{/if}}
-
-                                <div class="author-content">
-                                    <h3>
-                                        by <a href="{{url}}">{{name}}</a>
-                                    </h3>
-
-                                    {{#if bio}}
-                                        <p>{{bio}}</p>
-                                    {{else}}
-                                        <p>Read <a href="{{url}}">more posts</a> by this author.</p>
-                                    {{/if}}
-
-                                    <div class="author-meta">
-                                        <span class="social">
-                                            {{#if twitter}}<a href="{{twitter_url}}" class="twitter" title="{{twitter}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>{{/if}}
-                                            {{#if facebook}}<a href="{{facebook_url}}" class="facebook" title="{{facebook}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>{{/if}}
-                                        </span>
-                                        {{#if website}}<span class="author-link"><a href="{{website}}" target="_blank" rel="noopener noreferrer" title="{{website}}"><i class="fa fa-link" aria-hidden="true"></i></a></span>{{/if}}
-                                        {{#if location}}<span class="author-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{location}}</span>{{/if}}
-                                    </div>
-                                </div>
-                            </section>
-                        {{/author}}
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 ml-auto mr-auto">
-                        <div class="comments"></div>
-                    </div>
-                </div>
+            <div class="container-fluid">
+                <div class="comments"></div>
             </div>
         </article>
-        {{#get "posts" limit="3" include="tags, author" filter="id:-{{comment_id}}+tag:{{primary_tag.slug}}"}}
+        <!-- {{#get "posts" limit="3" include="tags, author" filter="id:-{{comment_id}}+tag:{{primary_tag.slug}}"}}
             {{#if posts}}
-                <div class="related-posts container">
+                <div class="related-posts container-fluid">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="loop">
@@ -98,7 +96,7 @@
                     </div>
                 </div>
             {{/if}}
-        {{/get}}
+        {{/get}} -->
     </main>
 
 {{/post}}

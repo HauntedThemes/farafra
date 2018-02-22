@@ -14,6 +14,10 @@ jQuery(document).ready(function($) {
         'disqus-shortname': 'hauntedthemes-demo'
     };
 
+    if ($('.horz-accordion .swiper-slide').length == 1) {
+        $('.horz-accordion').addClass('single');
+    };
+
     if (w < 1200) {
         swiperFeatured = new Swiper('.horz-accordion', {
             slidesPerView: 1,
@@ -35,23 +39,25 @@ jQuery(document).ready(function($) {
         w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
         h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
-        if (w < 1200) {
-            swiperFeatured.destroy();
-            swiperFeatured = new Swiper('.horz-accordion', {
-                slidesPerView: 1,
-                spaceBetween: 1,
-                effect: 'slide',
-                speed: 500,
-            });
-        }else{
-            swiperFeatured.destroy();
-            swiperFeatured = new Swiper('.horz-accordion', {
-                slidesPerView: 1,
-                spaceBetween: 1,
-                effect: 'fade',
-                speed: 500,
-                simulateTouch: false,
-            });
+        if ($('.horz-accordion').length) {
+            if (w < 1200) {
+                swiperFeatured.destroy();
+                swiperFeatured = new Swiper('.horz-accordion', {
+                    slidesPerView: 1,
+                    spaceBetween: 1,
+                    effect: 'slide',
+                    speed: 500,
+                });
+            }else{
+                swiperFeatured.destroy();
+                swiperFeatured = new Swiper('.horz-accordion', {
+                    slidesPerView: 1,
+                    spaceBetween: 1,
+                    effect: 'fade',
+                    speed: 500,
+                    simulateTouch: false,
+                });
+            };
         };
 
     });
@@ -290,7 +296,9 @@ jQuery(document).ready(function($) {
     $('.search').on('click', function(event) {
         event.preventDefault();
         $('#search, .backdrop, body').toggleClass('active');
-        $('#search input').focus();
+        setTimeout(function() {
+            $('#search input').focus();
+        }, 300);
     });
 
     $('.backdrop').on('click', function(event) {
