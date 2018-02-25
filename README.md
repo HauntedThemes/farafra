@@ -10,4 +10,4 @@ our awesome Ghost Themes.
 https://www.hauntedthemes.com/
 
 # farafra
-A theme that will only show one post at a time. If you're a fan of decluttering, know that we've decluttered the sh*t out of this one. Specially for you. But most importantly - it's FREE!
+In the menu today - a gourmet's theme. We got fat just by working on it. But hey, if you're not into food, it works with any other kind of imagery. Just make sure it's tasty enough.
