@@ -14,6 +14,8 @@ jQuery(document).ready(function($) {
         'disqus-shortname': 'hauntedthemes-demo'
     };
 
+    // Featured posts slider
+
     if ($('.horz-accordion .swiper-slide').length == 1) {
         $('.horz-accordion').addClass('single');
     };
@@ -24,6 +26,10 @@ jQuery(document).ready(function($) {
             spaceBetween: 1,
             effect: 'slide',
             speed: 500,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false
+            },
         });
     }else{
         swiperFeatured = new Swiper('.horz-accordion', {
@@ -32,8 +38,36 @@ jQuery(document).ready(function($) {
             effect: 'fade',
             speed: 500,
             simulateTouch: false,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false
+            },
         });
     };
+
+    $('.horz-accordion ul li').on('click', function(event) {
+        if (!swiperFeatured.animating) {
+            swiperFeatured.slideTo($(this).index());
+        };
+    });
+
+    $('.horz-accordion ul li .prev').on('click', function(event) {
+        event.preventDefault();
+        if (swiperFeatured.activeIndex == 0) {
+            swiperFeatured.slideTo($('.horz-accordion ul li').length - 1);
+        }else{
+            swiperFeatured.slidePrev();
+        };
+    });
+
+    $('.horz-accordion ul li .next').on('click', function(event) {
+        event.preventDefault();
+        if (swiperFeatured.activeIndex == $('.horz-accordion ul li').length - 1) {
+            swiperFeatured.slideTo(0);
+        }else{
+            swiperFeatured.slideNext();
+        };
+    });
 
     $(window).on('resize', function(event) {
         w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
@@ -47,6 +81,10 @@ jQuery(document).ready(function($) {
                     spaceBetween: 1,
                     effect: 'slide',
                     speed: 500,
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false
+                    },
                 });
             }else{
                 swiperFeatured.destroy();
@@ -56,6 +94,10 @@ jQuery(document).ready(function($) {
                     effect: 'fade',
                     speed: 500,
                     simulateTouch: false,
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false
+                    },
                 });
             };
         };
@@ -102,30 +144,6 @@ jQuery(document).ready(function($) {
         });
 
     };
-
-    $('.horz-accordion ul li').on('click', function(event) {
-        if (!swiperFeatured.animating) {
-            swiperFeatured.slideTo($(this).index());
-        };
-    });
-
-    $('.horz-accordion ul li .prev').on('click', function(event) {
-        event.preventDefault();
-        if (swiperFeatured.activeIndex == 0) {
-            swiperFeatured.slideTo($('.horz-accordion ul li').length - 1);
-        }else{
-            swiperFeatured.slidePrev();
-        };
-    });
-
-    $('.horz-accordion ul li .next').on('click', function(event) {
-        event.preventDefault();
-        if (swiperFeatured.activeIndex == $('.horz-accordion ul li').length - 1) {
-            swiperFeatured.slideTo(0);
-        }else{
-            swiperFeatured.slideNext();
-        };
-    });
 
     // Initialize ghostHunter - A Ghost blog search engine
     var searchField = $("#search-field").ghostHunter({
@@ -288,11 +306,13 @@ jQuery(document).ready(function($) {
         }
     });
 
+    // Show bookmark modal on click
     $('.bookmark').on('click', function(event) {
         event.preventDefault();
         $('#bookmark, .backdrop, body').toggleClass('active');
     });
 
+    // Show search modal on click
     $('.search').on('click', function(event) {
         event.preventDefault();
         $('#search, .backdrop, body').toggleClass('active');
@@ -301,29 +321,51 @@ jQuery(document).ready(function($) {
         }, 300);
     });
 
+    // Show menu modal on click
+    $('.menu').on('click', function(event) {
+        event.preventDefault();
+        $('#menu, .backdrop, body').toggleClass('active');
+    });
+
+    // Hide search, bookmark and menu on backdrop click
     $('.backdrop').on('click', function(event) {
         event.preventDefault();
         $(this).removeClass('active');
         $('#bookmark, #search, #menu, body').removeClass('active');
     });
 
-    $('.menu').on('click', function(event) {
-        event.preventDefault();
-        $('#menu, .backdrop, body').toggleClass('active');
-    });
-
+    // Hide search, bookmark and menu on x click
     $('.close').on('click', function(event) {
         event.preventDefault();
         $('.backdrop').click();
     });
 
-    // Execute on scroll
-    $(window).on('scroll', function(event) {
-        // Hide menu and search after scroll
-        var top = $(window).scrollTop();
-        if (top > (h/2)) {
-            $('.backdrop').click();
-        };
+    // Initialize shareSelectedText
+    if (config['share-selected-text']) {
+        shareSelectedText('.post-template .post-content', {
+            sanitize: true,
+            buttons: [
+                'twitter',
+            ],
+            tooltipTimeout: 250
+        });
+    }; 
+
+    // Execute on load
+    $(window).on('load', function(event) {
+
+        $('.post-content img').each(function(index, el) {
+            if (!$(this).parent().is("a")) {
+                $( "<a href='" + $(this).attr('src') + "' class='zoom'></a>" ).insertAfter( $(this) );
+                $(this).appendTo($(this).next("a"));
+            };
+        });
+
+        $('.zoom').fluidbox();
+
+        $(window).on('scroll', function(event) {
+            $('.zoom').fluidbox('close');
+        });
     });
 
 });

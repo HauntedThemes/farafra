@@ -1,4 +1,4 @@
-Farafra - Author Ghost Theme by Haunted Themes
+Farafra - Food Ghost Theme by Haunted Themes
 ============================
 
 > Copyright (C) HauntedThemes SRL

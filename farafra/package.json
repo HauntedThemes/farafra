@@ -15,7 +15,7 @@
     "gpm": {
         "type": "theme",
         "categories": [
-            "Recipes"
+            "Food"
         ]
     },
     "keywords": [
@@ -23,6 +23,6 @@
         "theme"
     ],
     "config": {
-        "posts_per_page": 2
+        "posts_per_page": 5
     }
 }
