@@ -436,6 +436,9 @@
            line-height:28px;
            padding:20px;
         }
+        figure{
+          margin: 30px 0;
+        }
         blockquote{
            padding:50px;
            border-top:1px solid #000;
@@ -451,9 +454,7 @@
            color:#fff;
         }
         iframe{
-           margin:30px 0;
-           height:calc(750px / 1.77777778);
-           width:100%;
+            margin: 30px 0;
         }
         .btn{
            background:black;
@@ -608,8 +609,8 @@
             display: block;
             padding: 0;
             min-width: 0;
-            max-width: 112%;
-            width: calc(100% + 32px);
+            max-width: 100%;
+            width: 100%;
             height: auto;
             transform: translateX(-50%);
             -webkit-transform: translateX(-50%);
@@ -669,6 +670,11 @@
         .post-content-container .line-b{
            left:35px;
            width:calc(100% - 70px);
+        }
+        .editor-content figcaption {
+            padding: 10px 15px;
+            font-size: 14px;
+            border-bottom: 1px solid #cccccc;
         }
         .author{
            border:1px solid #CCCCCC;
@@ -1018,7 +1024,7 @@
         }
         .post-content img{
            max-width:100%;
-           margin:50px auto;
+           margin: 0 auto 30px auto;
            display:block;
         }
         .close{
@@ -1308,7 +1314,6 @@
                max-width:calc(100% + 60px);
                position:relative;
                left:50%;
-               transform:translateX(-50%);
            }
             blockquote{
                padding:50px 30px;
@@ -1353,7 +1358,6 @@
                width:100vw;
                position:relative;
                left:50%;
-               transform:translateX(-50%);
            }
             footer .footer-newsletter .line-l{
                left:15px;
@@ -1460,80 +1464,82 @@
 <body class="amp-template">
     <header>
         <div class="container">
-           <div class="row">
-               <div class="col-6 ml-auto">
-                  <div class="blog-logo">
-                      <a href="{{@blog.url}}" title="{{@blog.title}}">
-                         <span>{{@blog.title}}</span>
-                      </a>
-                  </div>
-               </div>
-           </div>
+            <div class="row">
+                <div class="col-6 ml-auto">
+                    <div class="blog-logo">
+                        <a href="{{@blog.url}}" title="{{@blog.title}}">
+                            <span>{{@blog.title}}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
     {{#post}}
     <main id="content" role="main" data-id="{{comment_id}}">
         <article class="{{post_class}} content-inner-post">
-           <div class="container-fluid">
-               <div class="row">
-                  <div class="col-md-12 post-cover-container">
-                      <div class="post-cover post-meta {{#if feature_image}}has-image{{/if}}">
-                        {{#if feature_image}}
-                        <figure class="post-image">
-                            <amp-img src="{{img_url feature_image absolute="true"}}" width="600" height="400" layout="responsive"></amp-img>
-                        </figure>
-                        {{/if}}
-                         <div class="post-cover-inner-container">
-                             <h1 class="post-title"><span>{{title}}</span></h1>
-                             <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
-                         </div>
-                         <i class="line-t"></i> <i class="line-l"></i> <i class="line-r"></i>
-                      </div>
-                  </div>
-               </div>
-           </div>
-           <div class="container-fluid post-content-container">
-               <div class="post-content-inner-container">
-                  <section class="post-content">
-                      {{amp_content}}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12 post-cover-container">
+                        <div class="post-cover post-meta {{#if feature_image}}has-image{{/if}}">
+                            {{#if feature_image}}
+                            <figure class="post-image">
+                                <amp-img src="{{img_url feature_image absolute="true"}}" width="600" height="400" layout="responsive"></amp-img>
+                            </figure>
+                            {{/if}}
+                            <div class="post-cover-inner-container">
+                                <h1 class="post-title"><span>{{title}}</span></h1>
+                                <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
+                            </div>
+                            <i class="line-t"></i> <i class="line-l"></i> <i class="line-r"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid post-content-container">
+                <div class="post-content-inner-container">
+                    <section class="post-content">
+                        <div class="editor-content">{{amp_content}}</div>
                
-                      {{#if tags}}
-                         <div class="tags">
-                         {{#foreach tags}}
-                             <a href="{{url}}" title="{{name}}" class="tag tag-{{id}} {{slug}}">{{name}}</a>
-                         {{/foreach}}
-                         </div>
-                      {{/if}}
-                  </section>
-               </div>
-               <i class="line-b"></i> <i class="line-l"></i> <i class="line-r"></i>
-           </div>
-           <div class="container-fluid order-1">
-               {{#author}}
-                  <section class="author {{#if profile_image}}has-image{{/if}}">
-                      {{#if profile_image}}
-                      <figure class="author-image">
-                         <a class="img" href="{{url}}" title="{{name}}">
-                            <amp-img src="{{img_url profile_image absolute="true"}}" width="80" height="80" layout="responsive"></amp-img>
-                        </a>
-                      </figure>
-                      {{/if}}
+                        {{#if tags}}
+                            <div class="tags">
+                            {{#foreach tags}}
+                                <a href="{{url}}" title="{{name}}" class="tag tag-{{id}} {{slug}}">{{name}}</a>
+                            {{/foreach}}
+                            </div>
+                        {{/if}}
+                    </section>
+                </div>
+                <i class="line-b"></i> <i class="line-l"></i> <i class="line-r"></i>
+            </div>
+            <div class="container-fluid order-1">
+                {{#if authors}}
+                    {{#foreach authors}}
+                        {{#if @first}}
+                            <section class="author {{#if profile_image}}has-image{{/if}}">
+                                {{#if profile_image}}
+                                <figure class="author-image">
+                                    <a class="img" href="{{url}}" title="{{name}}">
+                                        <amp-img src="{{img_url profile_image absolute="true"}}" width="80" height="80" layout="responsive"></amp-img>
+                                    </a>
+                                </figure>
+                                {{/if}}
 
-                      <div class="author-content">
-                         <h3>
-                             by <a href="{{url}}">{{name}}</a>
-                         </h3>
+                                <div class="author-content">
+                                    <h3> {{t "by"}} <a href="{{url}}">{{name}}</a> </h3>
 
-                         {{#if bio}}
-                             <p>{{bio}}</p>
-                         {{else}}
-                             <p>Read <a href="{{url}}">more posts</a> by this author.</p>
-                         {{/if}}
+                                    {{#if bio}}
+                                        <p>{{bio}}</p>
+                                    {{else}}
+                                        <p>{{{t "Read <a href='{url}'>more posts</a> by this author" url=(url)}}}.</p>
+                                    {{/if}}
 
-                      </div>
-                  </section>
-               {{/author}}
+                                </div>
+                            </section>
+                        {{/if}}
+                    {{/foreach}}
+                {{/if}}
            </div>
         </article>
     </main>
@@ -1541,9 +1547,9 @@
 
     <footer class="site-footer container">
         <div class="row">
-           <div class="col-md-12 text-center">
-               <p class="copyright">&copy; {{date format="YYYY"}}, <a href="{{@blog.url}}">{{@blog.title}}</a>. All Right Reserved.</p>
-           </div>
+            <div class="col-md-12 text-center">
+                <p class="copyright">{{t "Copyright"}} &copy; {{date format="YYYY"}}, <a href="{{@blog.url}}">{{@blog.title}}</a>. {{t "All Right Reserved"}}.</p>
+            </div>
         </div>
     </footer>
 

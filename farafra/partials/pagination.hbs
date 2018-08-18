@@ -2,18 +2,18 @@
 	<div class="row">
 		<div class="col-md-12">
 			<span class="page-number">
-				<b>{{page}}</b> of {{pages}}
+				<b>{{page}}</b> {{t "of"}} {{pages}}
 			</span>
 			{{!-- Pagination --}}
 			<nav class="pagination" role="navigation">
-			    {{#if next}}
-			        <a class="older-posts" href="{{page_url next}}">
+			    {{#if prev}}
+			        <a class="newer-posts" href="{{page_url prev}}" title="{{t "Newer Posts"}}">
 			        	<svg width="26" height="16" xmlns="http://www.w3.org/2000/svg"><g stroke-width="3" stroke="#000" fill="none" fill-rule="evenodd"><path d="M9.95 1.06L3 8.01l6.95 6.95M3 8.01h23"/></g></svg>
 			        </a>
 			    {{/if}}
-			    {{#if prev}}
-			        <a class="newer-posts" href="{{page_url prev}}">
-			        <svg width="26" height="16" xmlns="http://www.w3.org/2000/svg"><g stroke="#000" stroke-width="3" fill="none" fill-rule="evenodd"><path d="M16.05 1.06L23 8.01l-6.95 6.95M23 8.01H0"/></g></svg>
+			    {{#if next}}
+			        <a class="older-posts" href="{{page_url next}}" title="{{t "Older Posts"}}">
+			        	<svg width="26" height="16" xmlns="http://www.w3.org/2000/svg"><g stroke="#000" stroke-width="3" fill="none" fill-rule="evenodd"><path d="M16.05 1.06L23 8.01l-6.95 6.95M23 8.01H0"/></g></svg>
 			        </a>
 			    {{/if}}
 			</nav>

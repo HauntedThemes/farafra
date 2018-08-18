@@ -176,14 +176,21 @@ h1, h2, h3, h4, h5, h6{
 
 code, kbd, pre, samp{
     color: black;
-    font-weight: bold;
+    font-weight: normal;
 }
 
 pre{
-    background: #ccc;
-    font-size: 18px;
-    line-height: 28px;
+    padding: 0;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.hljs{
     padding: 20px;
+}
+
+figure{
+    margin: 30px 0;
 }
 
 blockquote{
@@ -205,8 +212,15 @@ mark{
 
 iframe{
     margin: 30px 0;
+}
+
+iframe[src*="https://www.youtube.com/"]{
     height: calc(750px / 1.77777778) !important;
     width: 100% !important;
+}
+
+p iframe{
+    margin: 0;
 }
 
 .btn{
@@ -1049,11 +1063,15 @@ h1.post-title span{
 }
 
 .post-content{
-   padding: 80px 100px 220px 100px;
+    padding: 0px 0px 220px 0px;
+}
+
+.post-content .editor-content{
+    padding: 80px 100px 10px 100px;
     background: #fff;
     margin-top: -80px;
-    z-index: 2;
-    position: relative; 
+    z-index: 99;
+    position: relative;
 }
 
 .post-content p{
@@ -1102,7 +1120,7 @@ h1.post-title span{
 
 .post-content img{
     max-width: 100%;
-    margin: 50px auto;
+    margin: 0 auto;
     display: block;
 }
 
@@ -1138,6 +1156,38 @@ h1.post-title span{
 .post-content-container .line-b{
     left: 35px;
     width: calc(100% - 70px);
+}
+
+.editor-content a{
+    border-bottom: 3px solid #cccccc;
+}
+
+.editor-content a:hover{
+    background: #ccc;
+}
+
+.editor-content .kg-image-card{
+    margin: 50px 0;
+}
+
+.editor-content figcaption{
+    padding: 10px 15px;
+    font-size: 14px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.editor-content .kg-width-full img{
+    max-width: calc(100% + 648px);
+    transform: translateX(-50%);
+    left: 50%;
+    position: relative;
+}
+
+.editor-content .kg-width-wide img{
+    max-width: calc(100% + 324px);
+    transform: translateX(-50%);
+    left: 50%;
+    position: relative;
 }
 
 .comments-trigger{
@@ -1225,6 +1275,7 @@ h1.post-title span{
     position: absolute;
     top: 0;
     left: 0;
+    display: block;
     background-size: cover;
     background-position: left center;
     background-color: #000;
@@ -1481,12 +1532,12 @@ h1.post-title span{
     line-height: 9px;
 }
 
-.pagination a.older-posts:hover{
-    transform: translateX(-5px);
+.pagination a.older-posts{
+    margin-left: auto;
 }
 
-.pagination a.newer-posts{
-    margin-left: auto;
+.pagination a.older-posts:hover{
+    transform: translateX(-5px);
 }
 
 .pagination a.newer-posts:hover{
@@ -1654,6 +1705,8 @@ h1.post-title span{
     padding: 0;
     border-radius: 50%;
     border: 1px solid #cccccc;
+    object-fit: cover;
+    display: flex;
 }
 
 .author .author-content{
@@ -1755,6 +1808,8 @@ h1.post-title span{
     border-radius: 50%;
     width: 100px;
     height: 100px;
+    display: inline-flex;
+    object-fit: cover;
 }
 
 /* ==========================================================================
@@ -1851,7 +1906,7 @@ h1.post-title span{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0;
+    margin: 0 auto;
 }
 
 /* ==========================================================================
@@ -2060,6 +2115,17 @@ footer .copyright{
     cursor: zoom-in;
 }
 
+.progress{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 2px;
+    border: none;
+    z-index: 2;
+    background: #000000;
+}
+
 /* ==========================================================================
    9. Responsive
    ========================================================================== */
@@ -2068,6 +2134,15 @@ footer .copyright{
     .container,
     .container-fluid {
         max-width: 1440px;
+    }
+}
+
+@media (max-width: 1440px){
+    .editor-content .kg-width-full img {
+        max-width: calc(100vw - 70px);
+    }
+    .editor-content .kg-width-wide img {
+        max-width: calc(100vw - 280px);
     }
 }
 
@@ -2122,17 +2197,21 @@ footer .copyright{
         -webkit-transition: none;
         transition: none;
     }
+    .editor-content .kg-width-wide img {
+        max-width: calc(100vw - 140px);
+    }
     .pagination-container{
         max-width: calc(100% - 30px);
     }
     .site-footer{
         max-width: 100%;
+        margin-top: 20px;
     }
 }
 
 @media (max-width: 991px) {
-    iframe{
-        height: calc(690px / 1.77777778) !important;
+    iframe[src*="https://www.youtube.com/"]{
+        height: calc((100vw - 246px) / 1.77777778) !important;
     }
     .list-box li{
         width: calc(50% - 5px);
@@ -2157,7 +2236,7 @@ footer .copyright{
     .post-cover .line-r{
         right: 15px;
     }
-    .post-content{
+    .post-content .editor-content{
         padding: 40px 50px 220px 50px;
     }
     .post-content-container .line-l{
@@ -2169,6 +2248,12 @@ footer .copyright{
     }
     .post-content-container .line-r{
         right: 30px;
+    }
+    .editor-content .kg-width-full img {
+        max-width: calc(100vw - 60px);
+    }
+    .editor-content .kg-width-wide img {
+        max-width: calc(100vw - 120px);
     }
     h1.post-title{
         font-size: 56px;
@@ -2188,9 +2273,11 @@ footer .copyright{
 
 @media (max-width: 767px) {
     iframe{
-        height: calc(100vw / 1.77777778) !important;
-        width: 100vw !important;
         position: relative;
+    }
+    iframe[src*="https://www.youtube.com/"]{
+        height: calc((100vw - 30px) / 1.77777778) !important;
+        width: calc(100vw - 30px) !important;
         left: 50%;
         transform: translateX(-50%);
     }
@@ -2232,6 +2319,9 @@ footer .copyright{
     header #search-field{
         max-width: 100%;
         margin-top: 10px;
+    }
+    .bookmark-container .no-bookmarks{
+        display: block;
     }
     .line-r{
         right: 15px;
@@ -2341,8 +2431,10 @@ footer .copyright{
         left: 15px;
         width: calc(100% - 30px);
     }
-    .post-content img{
-        max-width: calc(100% + 60px);
+    .post-content img,
+    .editor-content .kg-width-full img,
+    .editor-content .kg-width-wide img{
+        max-width: calc(100% + 30px);
         position: relative;
         left: 50%;
         transform: translateX(-50%);
@@ -2382,11 +2474,15 @@ footer .copyright{
         margin-top: 0;
         padding: 40px 0px 90px 0px;
     }
+    .post-content .editor-content{
+        padding: 10px 0px 0px 0px;
+        margin: 0px;
+    }
     .pagination{
         padding: 0 15px;
     }
     .pagination-container{
-        padding-top: 0;
+        padding-top: 25px;
     }
     #content .horz-accordion{
         margin-bottom: 25px;
@@ -2410,7 +2506,8 @@ footer .copyright{
         flex-direction: column;
         width: 100%;
     }
-    #content .horz-accordion ul li article .feature-img{
+    #content .horz-accordion ul li article .feature-img,
+    #content .horz-accordion ul li article .feature-link{
         position: relative;
         height: 295px;
     }

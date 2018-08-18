@@ -24,9 +24,9 @@
             <!-- Bookmark Modal -->
             <div id="bookmark">
                 <div class="bookmark-inner">
-                    <h3>Bookmarks</h3>
+                    <h3>{{t "Bookmarks"}}</h3>
                     <div class="bookmark-container">
-                        <p class="no-bookmarks">You haven't yet saved any bookmarks. To bookmark a post, just click <i class="circle"></i>.</p>
+                        <p class="no-bookmarks">{{t "You haven't yet saved any bookmarks. To bookmark a post, just click <i class='circle'></i>."}}</p>
                     </div>
                 </div>
                 <a href="#" class="close">
@@ -37,12 +37,12 @@
             <!-- Search Modal -->
             <div id="search">
                 <div class="search-inner">
-                    <h3>Search</h3>
+                    <h3>{{t "Search"}}</h3>
                     <div class="search-container">
                         <form>
-                            <input id="search-field" placeholder="Search" autocomplete="off"/>
+                            <input id="search-field" placeholder="{{t "Search"}}" autocomplete="off"/>
                         </form>
-                        <div id="results"></div>                   
+                        <div id="results" data-other="{{t "Other"}}"></div>                   
                     </div>
                 </div>
                 <a href="#" class="close">
@@ -53,19 +53,19 @@
             <!-- Menu Modal -->
             <div id="menu">
                 <div class="menu-inner">
-                    <h3>Menu</h3>
+                    <h3>{{t "Menu"}}</h3>
                     <div class="menu-container">
                         {{navigation}}
                         <ul class="social">
                             {{#if @blog.facebook}}
-                                <li><a href="{{facebook_url}}" class="facebook" title="{{@blog.facebook}}" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="{{facebook_url}}" class="facebook" title="{{@blog.facebook}}" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
                             {{/if}}
                             {{#if @blog.twitter}}
-                                <li><a href="{{twitter_url}}" class="twitter" title="{{@blog.twitter}}" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="{{twitter_url}}" class="twitter" title="{{@blog.twitter}}" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
                             {{/if}}
-                            <li><a href="https://www.youtube.com/" class="youtube" title="Youtube" target="_blank"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
-                            <li><a href="https://www.instagram.com/" class="instagram" title="Instagram" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                            <li><a href="{{@blog.url}}/rss"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.youtube.com/" class="youtube" title="Youtube" target="_blank"><i class="fab fa-youtube" aria-hidden="true"></i></a></li>
+                            <li><a href="https://www.instagram.com/" class="instagram" title="Instagram" target="_blank"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="{{@blog.url}}/rss" title="{{t "RSS Feed"}}" target="_blank"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
                         </ul>
                     </div>
                 </div>
