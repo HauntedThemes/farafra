@@ -5,23 +5,25 @@
             <div class="col-md-12">
                 <div class="footer-content">
                     <div class="row">
-                        {{#get "tags" include="count.posts"}}
-                            <div class="col-md-6">
-                                <div class="footer-tags">
-                                    <h3>{{t "Tags"}}</h3>
-                                    <ul class="tags">
-                                        {{#foreach tags}}
-                                            {{#if count.posts}}
-                                                <li>
-                                                    <a href="{{url}}">{{name}}</a>
-                                                </li>
-                                            {{/if}}
-                                        {{/foreach}}
-                                    </ul>
-                                    <i class="line-t"></i> <i class="line-r"></i> <i class="line-b"></i> <i class="line-l"></i>
+                        {{#if @labs.publicAPI}}
+                            {{#get "tags" include="count.posts"}}
+                                <div class="col-md-6">
+                                    <div class="footer-tags">
+                                        <h3>{{t "Tags"}}</h3>
+                                        <ul class="tags">
+                                            {{#foreach tags}}
+                                                {{#if count.posts}}
+                                                    <li>
+                                                        <a href="{{url}}">{{name}}</a>
+                                                    </li>
+                                                {{/if}}
+                                            {{/foreach}}
+                                        </ul>
+                                        <i class="line-t"></i> <i class="line-r"></i> <i class="line-b"></i> <i class="line-l"></i>
+                                    </div>
                                 </div>
-                            </div>
-                        {{/get}}
+                            {{/get}}
+                        {{/if}}
                         {{#if @labs.subscribers}}
                         <div class="col-md-6">
                             <div class="footer-newsletter">

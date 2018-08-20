@@ -8,15 +8,13 @@ jQuery(document).ready(function($) {
         h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
         readLaterPosts = [],
         swiperFeatured,
-        lang = $('body').attr('lang'),
-        noBookmarksMessage = $('.no-bookmarks').text();
+        noBookmarksMessage = $('.no-bookmarks').text(),
+        monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Sepember", "October", "November", "December"];
 
     var config = {
         'share-selected-text': true,
         'disqus-shortname': 'hauntedthemes-demo'
     };
-
-    moment.locale(lang);
 
     // Featured posts slider
 
@@ -114,11 +112,14 @@ jQuery(document).ready(function($) {
 
     });
 
-    if (typeof Cookies.get('farfara-read-later') !== "undefined") {
-        readLaterPosts = JSON.parse(Cookies.get('farfara-read-later'));
-    }
+    if (typeof ghost !== 'undefined') {
+        if (typeof Cookies.get('farfara-read-later') !== "undefined") {
+            readLaterPosts = JSON.parse(Cookies.get('farfara-read-later'));
+        }
 
-    readLaterPosts = readLater($('#content .loop'), readLaterPosts);
+        readLaterPosts = readLater($('#content .loop'), readLaterPosts);
+    };
+
 
     // Initialize Disqus comments
     if ($('#content').attr('data-id') && config['disqus-shortname'] != '') {
@@ -160,52 +161,57 @@ jQuery(document).ready(function($) {
         hljs.highlightBlock(block);
     });
 
-    // Initialize ghostHunter - A Ghost blog search engine
-    var searchField = $("#search-field").ghostHunter({
-        results             : "#results",
-        onKeyUp             : true,
-        zeroResultsInfo     : true,
-        displaySearchInfo   : false,
-        onComplete      : function( results ){
+    if (typeof ghost !== 'undefined') {
 
-            $('#results').empty();
+        // Initialize ghostHunter - A Ghost blog search engine
+        var searchField = $("#search-field").ghostHunter({
+            results             : "#results",
+            onKeyUp             : true,
+            zeroResultsInfo     : true,
+            displaySearchInfo   : false,
+            onComplete      : function( results ){
 
-            var tags = [];
-            $.each(results, function(index, val) {
-                if (val.tags.length) {
-                    if ($.inArray(val.tags[0], tags) === -1) {
-                        tags.push(val.tags[0]);
+                $('#results').empty();
+
+                var tags = [];
+                $.each(results, function(index, val) {
+                    if (val.tags.length) {
+                        if ($.inArray(val.tags[0], tags) === -1) {
+                            tags.push(val.tags[0]);
+                        };
+                    }else{
+                        if ($.inArray('Other', tags) === -1) {
+                            tags.push('Other');
+                        };
                     };
-                }else{
-                    if ($.inArray('Other', tags) === -1) {
-                        tags.push('Other');
+                });
+                tags.sort();
+
+                $.each(tags, function(index, val) {
+                    var tag = val;
+                    if (val == 'Other') {
+                        tag = $('#results').attr('data-other');
                     };
-                };
-            });
-            tags.sort();
+                    $('#results').append('<h5>'+ tag +'</h5><ul data-tag="'+ val +'" class="list-box"</ul>');
+                });
 
-            $.each(tags, function(index, val) {
-                var tag = val;
-                if (val == 'Other') {
-                    tag = $('#results').attr('data-other');
-                };
-                $('#results').append('<h5>'+ tag +'</h5><ul data-tag="'+ val +'" class="list-box"</ul>');
-            });
+                $.each(results, function(index, val) {
+                    var dateSplit = val.pubDate.split(' ')
+                    var month = monthNames.indexOf(dateSplit[1])+1;
+                    var date = moment(dateSplit[0]+'-'+month+'-'+dateSplit[2], "DD-MM-YYYY").format('DD MMM YYYY');
+                    if (val.tags.length) {
+                        $('#results ul[data-tag="'+ val.tags[0] +'"]').append('<li><time>'+ date +'</time><a href="#" class="read-later" data-id="'+ val.ref +'"></a><a href="'+ val.link +'">'+ val.title +'</a></li>');
+                    }else{
+                        $('#results ul[data-tag="Other"]').append('<li><a href="#" class="read-later" data-id="'+ val.ref +'"></a><time>'+ date +'</time><a href="'+ val.link +'">'+ val.title +'</a></li>');
+                    };
+                });
 
-            $.each(results, function(index, val) {
-                console.log(val.pubDate);
-                var date = moment(val.pubDate, "D MMMM YYYY").format('DD MMM YYYY');
-                if (val.tags.length) {
-                    $('#results ul[data-tag="'+ val.tags[0] +'"]').append('<li><time>'+ date +'</time><a href="#" class="read-later" data-id="'+ val.ref +'"></a><a href="'+ val.link +'">'+ val.title +'</a></li>');
-                }else{
-                    $('#results ul[data-tag="Other"]').append('<li><a href="#" class="read-later" data-id="'+ val.ref +'"></a><time>'+ date +'</time><a href="'+ val.link +'">'+ val.title +'</a></li>');
-                };
-            });
+                readLaterPosts = readLater($('#results'), readLaterPosts);
 
-            readLaterPosts = readLater($('#results'), readLaterPosts);
+            }
+        });
 
-        }
-    });
+    }
 
     function readLater(content, readLaterPosts){
 
@@ -274,7 +280,9 @@ jQuery(document).ready(function($) {
                 });
 
                 $.each(data.posts, function(index, val) {
-                    var date = moment(prettyDate(val.published_at), "D MMMM YYYY").format('DD MMM YYYY');
+                    var dateSplit = prettyDate(val.published_at).split(' ')
+                    var month = monthNames.indexOf(dateSplit[1])+1;
+                    var date = moment(dateSplit[0]+'-'+month+'-'+dateSplit[2], "DD-MM-YYYY").format('DD MMM YYYY');
                     if (val.tags.length) {
                         $('.bookmark-container ul[data-tag="'+ val.tags[0].name +'"]').append('<li><time>'+ date +'</time><a href="#" class="read-later active" data-id="'+ val.id +'"></a><a href="/'+ val.slug +'">'+ val.title +'</a></li>');
                     }else{
