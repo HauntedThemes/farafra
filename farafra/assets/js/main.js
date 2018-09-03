@@ -9,7 +9,7 @@ jQuery(document).ready(function($) {
         readLaterPosts = [],
         swiperFeatured,
         noBookmarksMessage = $('.no-bookmarks').text(),
-        monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "Sepember", "October", "November", "December"];
+        monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     var config = {
         'share-selected-text': true,
