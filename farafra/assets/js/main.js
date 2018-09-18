@@ -8,13 +8,15 @@ jQuery(document).ready(function($) {
         h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
         readLaterPosts = [],
         swiperFeatured,
-        noBookmarksMessage = $('.no-bookmarks').text(),
+        noBookmarksMessage = $('.no-bookmarks').html(),
         monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     var config = {
         'share-selected-text': true,
         'disqus-shortname': 'hauntedthemes-demo'
     };
+
+    setGalleryRation();
 
     // Featured posts slider
 
@@ -311,13 +313,15 @@ jQuery(document).ready(function($) {
                     $('header .counter').removeClass('hidden').text(data.posts.length);
                 }else{
                     $('header .counter').addClass('hidden');
-                    $('.bookmark-container').append('<p class="no-bookmarks">'+ noBookmarksMessage +'</p>');
+                    $('.bookmark-container').append('<p class="no-bookmarks"></p>');
+                    $('.no-bookmarks').html(noBookmarksMessage)
                 };
 
             });
         }else{
             $('header .counter').addClass('hidden');
-            $('.bookmark-container').append('<p class="no-bookmarks">'+ noBookmarksMessage +'</p>')
+            $('.bookmark-container').append('<p class="no-bookmarks"></p>');
+            $('.no-bookmarks').html(noBookmarksMessage)
         };
 
     }
@@ -395,6 +399,8 @@ jQuery(document).ready(function($) {
     // Execute on load
     $(window).on('load', function(event) {
 
+        setGalleryRation();
+
         $('.post-content img').each(function(index, el) {
             if (!$(this).parent().is("a")) {
                 $( "<a href='" + $(this).attr('src') + "' class='zoom'></a>" ).insertAfter( $(this) );
@@ -462,5 +468,16 @@ jQuery(document).ready(function($) {
     if (detectIE()) {
         $('body').addClass('ie');
     };
+
+    // Set the right proportion for images inside the gallery
+    function setGalleryRation(){
+        $('.kg-gallery-image img').each(function(index, el) {
+            var container = $(this).closest('.kg-gallery-image');
+            var width = $(this)[0].naturalWidth;
+            var height = $(this)[0].naturalHeight;
+            var ratio = width / height;
+            container.attr('style', 'flex: ' + ratio + ' 1 0%');
+        });
+    }
 
 });
