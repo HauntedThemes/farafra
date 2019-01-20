@@ -23,7 +23,6 @@
                 <div class="post-content-inner-container">
                     <section class="post-content">
                         <div class="editor-content">{{content}}</div>
-                
                         {{#if tags}}
                             <div class="tags">
                             {{#foreach tags}}
@@ -86,23 +85,21 @@
                 <div class="comments"></div>
             </div>
         </article>
-        {{#if @labs.publicAPI}}
-            {{#get "posts" limit="3" include="tags, authors" filter="id:-{{id}}+primary_tag:{{primary_tag.slug}}"}}
-                {{#if posts}}
-                    <div class="related-posts container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="loop">
-                                    {{#foreach posts}}
-                                        {{> "loop"}}
-                                    {{/foreach}}
-                                </div>
+        {{#get "posts" limit="3" include="tags, authors" filter="id:-{{id}}+primary_tag:{{primary_tag.slug}}"}}
+            {{#if posts}}
+                <div class="related-posts container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="loop">
+                                {{#foreach posts}}
+                                    {{> "loop"}}
+                                {{/foreach}}
                             </div>
                         </div>
                     </div>
-                {{/if}}
-            {{/get}}
-        {{/if}}
+                </div>
+            {{/if}}
+        {{/get}}
     </main>
 
 {{/post}}
