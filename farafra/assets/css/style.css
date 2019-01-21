@@ -530,7 +530,7 @@ header h5:before{
     transition: background-size 0.3s ease-in-out;
 }
 
-.list-box li a:hover{
+.list-box li a:not(.read-later):hover{
     background-size: 100% 100%;
 }
 
@@ -571,6 +571,7 @@ header h5:before{
     visibility: hidden;
     pointer-events: none;
     display: flex;
+    max-height: 100vh;
     transform: translateY(-110%) rotateX(-15deg) scale(.95);
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
@@ -591,6 +592,7 @@ body.active #bookmark.active{
     padding: 30px;
     display: flex;
     flex-direction: column;
+    overflow: auto;
 }
 
 .ie #bookmark .bookmark-inner{
@@ -602,13 +604,6 @@ body.active #bookmark.active{
     letter-spacing: 2px;
     line-height: 21px;
     text-transform: uppercase;
-}
-
-.bookmark-container{
-    flex: 1;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
 }
 
 .bookmark-container .no-bookmarks{
@@ -1966,6 +1961,15 @@ footer .footer-content .col-md-6{
     display: flex;
 }
 
+footer .no-subscribers .footer-tags .line-t, 
+footer .no-subscribers .footer-tags .line-b{
+    width: calc(100% - 40px);
+}
+
+footer .no-subscribers .footer-tags .line-r {
+    right: 20px;
+}
+
 footer h3{
     font-size: 17px;
     letter-spacing: 2px;
@@ -2721,11 +2725,16 @@ footer .copyright{
         font-size: 15px;
         line-height: 18px;
     }
-    footer .footer-tags .line-r{
+    footer .footer-tags .line-r,
+    footer .no-subscribers .footer-tags .line-r{
         right: 15px;
     }
-    footer .footer-content .col-md-6{
+    footer .footer-content .col-md-6,
+    footer .footer-content .col-md-12{
         padding-left: 0;
         padding-right: 0;
+    }
+    footer .no-subscribers .footer-tags .line-t, footer .no-subscribers .footer-tags .line-b {
+        width: calc(100% - 30px);
     }
 }

@@ -13,8 +13,16 @@ jQuery(document).ready(function($) {
 
     var config = {
         'share-selected-text': true,
-        'disqus-shortname': 'hauntedthemes-demo'
+        'disqus-shortname': 'hauntedthemes-demo',
+        'content-api-host': '',
+        'content-api-key': '',
     };
+
+    var ghostAPI = new GhostContentAPI({
+        host: config['content-api-host'],
+        key: config['content-api-key'],
+        version: 'v2'
+    });
 
     setGalleryRation();
 
@@ -114,13 +122,11 @@ jQuery(document).ready(function($) {
 
     });
 
-    if (typeof ghost !== 'undefined') {
-        if (typeof Cookies.get('farfara-read-later') !== "undefined") {
-            readLaterPosts = JSON.parse(Cookies.get('farfara-read-later'));
-        }
+    if (typeof Cookies.get('farfara-read-later') !== "undefined") {
+        readLaterPosts = JSON.parse(Cookies.get('farfara-read-later'));
+    }
 
-        readLaterPosts = readLater($('#content .loop'), readLaterPosts);
-    };
+    readLaterPosts = readLater($('#content .loop'), readLaterPosts);
 
 
     // Initialize Disqus comments
@@ -163,23 +169,27 @@ jQuery(document).ready(function($) {
         hljs.highlightBlock(block);
     });
 
-    if (typeof ghost !== 'undefined') {
-
-        // Initialize ghostHunter - A Ghost blog search engine
-        var searchField = $("#search-field").ghostHunter({
-            results             : "#results",
-            onKeyUp             : true,
-            zeroResultsInfo     : true,
-            displaySearchInfo   : false,
-            onComplete      : function( results ){
+    var ghostSearch = new GhostSearch({
+        host: config['content-api-host'],
+        key: config['content-api-key'],
+        input: '#search-field',
+        results: '#results',
+        api: {
+            parameters: { 
+                fields: ['title', 'slug', 'published_at', 'primary_tag', 'id'],
+                include: 'tags',
+            },
+        },
+        on: {
+            afterDisplay: function(results){
 
                 $('#results').empty();
-
+                
                 var tags = [];
                 $.each(results, function(index, val) {
-                    if (val.tags.length) {
-                        if ($.inArray(val.tags[0], tags) === -1) {
-                            tags.push(val.tags[0]);
+                    if (val.obj.primary_tag) {
+                        if ($.inArray(val.obj.primary_tag.name, tags) === -1) {
+                            tags.push(val.obj.primary_tag.name);
                         };
                     }else{
                         if ($.inArray('Other', tags) === -1) {
@@ -187,6 +197,7 @@ jQuery(document).ready(function($) {
                         };
                     };
                 });
+
                 tags.sort();
 
                 $.each(tags, function(index, val) {
@@ -194,26 +205,26 @@ jQuery(document).ready(function($) {
                     if (val == 'Other') {
                         tag = $('#results').attr('data-other');
                     };
-                    $('#results').append('<h5>'+ tag +'</h5><ul data-tag="'+ val +'" class="list-box"</ul>');
+                    $('#results').append('<h5>'+ tag +'</h5><ul data-tag="'+ val +'" class="list-box"></ul>');
                 });
 
                 $.each(results, function(index, val) {
-                    var dateSplit = val.pubDate.split(' ')
-                    var month = monthNames.indexOf(dateSplit[1])+1;
-                    var date = moment(dateSplit[0]+'-'+month+'-'+dateSplit[2], "DD-MM-YYYY").format('DD MMM YYYY');
-                    if (val.tags.length) {
-                        $('#results ul[data-tag="'+ val.tags[0] +'"]').append('<li><time>'+ date +'</time><a href="#" class="read-later" data-id="'+ val.ref +'"></a><a href="'+ val.link +'">'+ val.title +'</a></li>');
+                    var dateSplit = val.obj.published_at.split('T');
+                    dateSplit = dateSplit[0].split('-');
+                    var month = monthNames[dateSplit[1]-1];
+                    var date = moment(dateSplit[2]+'-'+month+'-'+dateSplit[1], "DD-MM-YYYY").format('DD MMM YYYY');
+                    if (val.obj.primary_tag) {
+                        $('#results ul[data-tag="'+ val.obj.primary_tag.name +'"]').append('<li><time>'+ date +'</time><a href="#" class="read-later" data-id="'+ val.obj.id +'"></a><a href="'+ val.obj.slug +'">'+ val.obj.title +'</a></li>');
                     }else{
-                        $('#results ul[data-tag="Other"]').append('<li><a href="#" class="read-later" data-id="'+ val.ref +'"></a><time>'+ date +'</time><a href="'+ val.link +'">'+ val.title +'</a></li>');
+                        $('#results ul[data-tag="Other"]').append('<li><a href="#" class="read-later" data-id="'+ val.obj.id +'"></a><time>'+ date +'</time><a href="'+ val.obj.slug +'">'+ val.obj.title +'</a></li>');
                     };
                 });
 
                 readLaterPosts = readLater($('#results'), readLaterPosts);
 
-            }
-        });
-
-    }
+            },
+        }
+    })
 
     function readLater(content, readLaterPosts){
 
@@ -257,67 +268,77 @@ jQuery(document).ready(function($) {
             var filter = readLaterPosts.toString();
             filter = "id:["+filter+"]";
 
-            $.get(ghost.url.api('posts', {filter:filter, include:"tags"})).done(function (data){
-                $('.bookmark-container').empty();
-                var tags = [];
-                $.each(data.posts, function(index, val) {
-                    if (val.tags.length) {
-                        if ($.inArray(val.tags[0].name, tags) === -1) {
-                            tags.push(val.tags[0].name);
-                        };
-                    }else{
-                        if ($.inArray('Other', tags) === -1) {
-                            tags.push('Other');
-                        };
-                    };
-                });
-                tags.sort();
+            ghostAPI.posts
+                .browse({limit: 'all', filter: filter, include: 'tags'})
+                .then((results) => {
 
-                $.each(tags, function(index, val) {
-                    var tag = val;
-                    if (val == 'Other') {
-                        tag = $('#results').attr('data-other');
-                    };
-                    $('.bookmark-container').append('<h5>'+ tag +'</h5><ul data-tag="'+ val +'" class="list-box"</ul>');
-                });
+                    $('.bookmark-container').empty();
 
-                $.each(data.posts, function(index, val) {
-                    var dateSplit = prettyDate(val.published_at).split(' ')
-                    var month = monthNames.indexOf(dateSplit[1])+1;
-                    var date = moment(dateSplit[0]+'-'+month+'-'+dateSplit[2], "DD-MM-YYYY").format('DD MMM YYYY');
-                    if (val.tags.length) {
-                        $('.bookmark-container ul[data-tag="'+ val.tags[0].name +'"]').append('<li><time>'+ date +'</time><a href="#" class="read-later active" data-id="'+ val.id +'"></a><a href="/'+ val.slug +'">'+ val.title +'</a></li>');
-                    }else{
-                        $('.bookmark-container ul[data-tag="Other"]').append('<li><a href="#" class="read-later active" data-id="'+ val.id +'"></a><time>'+ date +'</time><a href="/'+ val.slug +'">'+ val.title +'</a></li>');
-                    };
-                });
-
-                $('.bookmark-container').find('.read-later').each(function(index, el) {
-                    $(this).on('click', function(event) {
-                        event.preventDefault();
-                        var id = $(this).attr('data-id');
-                        if ($(this).hasClass('active')) {
-                            removeValue(readLaterPosts, id);
+                    var tags = [];
+                    $.each(results, function(index, val) {
+                        if (val.primary_tag) {
+                            if ($.inArray(val.primary_tag.name, tags) === -1) {
+                                tags.push(val.primary_tag.name);
+                            };
                         }else{
-                            readLaterPosts.push(id);
+                            if ($.inArray('Other', tags) === -1) {
+                                tags.push('Other');
+                            };
                         };
-                        $('.read-later[data-id="'+ id +'"]').each(function(index, el) {
-                            $(this).toggleClass('active');
-                        });
-                        Cookies.set('farfara-read-later', readLaterPosts, { expires: 365 });
-                        bookmarks(readLaterPosts);
                     });
+    
+                    tags.sort();
+
+                    $.each(tags, function(index, val) {
+                        var tag = val;
+                        if (val == 'Other') {
+                            tag = $('.bookmark-container').attr('data-other');
+                        };
+                        $('.bookmark-container').append('<h5>'+ tag +'</h5><ul data-tag="'+ val +'" class="list-box"></ul>');
+                    });
+    
+                    $.each(results, function(index, val) {
+                        var dateSplit = val.published_at.split('T');
+                        dateSplit = dateSplit[0].split('-');
+                        var month = monthNames[dateSplit[1]-1];
+                        var date = moment(dateSplit[2]+'-'+month+'-'+dateSplit[1], "DD-MM-YYYY").format('DD MMM YYYY');
+                        if (val.primary_tag) {
+                            $('.bookmark-container ul[data-tag="'+ val.primary_tag.name +'"]').append('<li><time>'+ date +'</time><a href="#" class="read-later active" data-id="'+ val.id +'"></a><a href="'+ val.slug +'">'+ val.title +'</a></li>');
+                        }else{
+                            $('.bookmark-container ul[data-tag="Other"]').append('<li><a href="#" class="read-later active" data-id="'+ val.id +'"></a><time>'+ date +'</time><a href="'+ val.slug +'">'+ val.title +'</a></li>');
+                        };
+                    });
+
+                    $('.bookmark-container').find('.read-later').each(function(index, el) {
+                        $(this).on('click', function(event) {
+                            event.preventDefault();
+                            var id = $(this).attr('data-id');
+                            if ($(this).hasClass('active')) {
+                                removeValue(readLaterPosts, id);
+                            }else{
+                                readLaterPosts.push(id);
+                            };
+                            $('.read-later[data-id="'+ id +'"]').each(function(index, el) {
+                                $(this).toggleClass('active');
+                            });
+                            Cookies.set('farfara-read-later', readLaterPosts, { expires: 365 });
+                            bookmarks(readLaterPosts);
+                        });
+                    });
+
+                    if (results) {
+                        $('header .counter').removeClass('hidden').text(results.length);
+                    }else{
+                        $('header .counter').addClass('hidden');
+                        $('.bookmark-container').append('<p class="no-bookmarks"></p>');
+                        $('.no-bookmarks').html(noBookmarksMessage)
+                    };
+
+                })
+                .catch((err) => {
+                    console.error(err);
                 });
-
-                if (data.posts.length) {
-                    $('header .counter').removeClass('hidden').text(data.posts.length);
-                }else{
-                    $('header .counter').addClass('hidden');
-                    $('.bookmark-container').append('<p class="no-bookmarks"></p>');
-                    $('.no-bookmarks').html(noBookmarksMessage)
-                };
-
-            });
+           
         }else{
             $('header .counter').addClass('hidden');
             $('.bookmark-container').append('<p class="no-bookmarks"></p>');
@@ -325,12 +346,6 @@ jQuery(document).ready(function($) {
         };
 
     }
-
-    function prettyDate(date) {
-        var d = new Date(date);
-        var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            return d.getDate() + ' ' + monthNames[d.getMonth()] + ' ' + d.getFullYear();
-    };
 
     function removeValue(arr) {
         var what, a = arguments, L = a.length, ax;

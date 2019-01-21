@@ -6,7 +6,7 @@
                 <div class="footer-content">
                     <div class="row">
                         {{#get "tags" include="count.posts"}}
-                            <div class="col-md-6">
+                            <div class="{{^if @labs.subscribers}}col-md-12 no-subscribers{{else}}col-md-6{{/if}}">
                                 <div class="footer-tags">
                                     <h3>{{t "Tags"}}</h3>
                                     <ul class="tags">
@@ -22,6 +22,7 @@
                                 </div>
                             </div>
                         {{/get}}
+                        {{#if @labs.subscribers}}
                         <div class="col-md-6">
                             <div class="footer-newsletter">
                                 <h3>{{t "Newsletter"}}</h3>
@@ -34,6 +35,7 @@
                                 <i class="line-t"></i> <i class="line-r"></i> <i class="line-b"></i> <i class="line-l"></i>
                             </div>
                         </div>
+                        {{/if}}
                     </div>
                 </div>
             </div>

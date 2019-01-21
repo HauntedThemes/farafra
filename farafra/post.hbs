@@ -4,12 +4,33 @@
 {{!-- Everything inside the #post tags pulls data from the post --}}
 {{#post}}
 
+    {{#if feature_image}}
+    <style type="text/css">
+        .responsive-header-img {
+            background-image: url({{img_url feature_image size='l'}});
+        }
+        @media(max-width: 767px) {
+            .responsive-header-img {
+                background-image: url({{img_url feature_image size='m'}});
+                background-image: -webkit-image-set(
+                    url({{img_url feature_image size='m'}}) 1x,
+                    url({{img_url feature_image size='l'}}) 2x
+                );
+                background-image: image-set(
+                    url({{img_url feature_image size='m'}}) 1x,
+                    url({{img_url feature_image size='l'}}) 2x
+                );
+            }
+        }
+    </style>
+    {{/if}}
+
     <main id="content" role="main" data-id="{{comment_id}}">
         <article class="{{post_class}} content-inner-post">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 post-cover-container">
-                        <div class="post-cover post-meta {{#if feature_image}}has-image{{/if}}" {{#if feature_image}} style="background-image: url({{img_url feature_image}});"{{/if}}>
+                        <div class="post-cover post-meta {{#if feature_image}}responsive-header-img has-image{{/if}}">
                             <div class="post-cover-inner-container">
                                 <h1 class="post-title"><span>{{title}}</span></h1>
                                 <time class="post-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>

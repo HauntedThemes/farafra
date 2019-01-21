@@ -2,34 +2,57 @@
 {{!< default}}
 
 {{#author}}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="intro {{#if cover_image}}has-cover{{/if}}" {{#if cover_image}} style="background-image: url({{img_url cover_image}})" {{/if}}>
-                {{#if profile_image}}
-                    <img src="{{img_url profile_image}}" alt="{{name}}" class="profile-image">
-                {{/if}}
-                <h1>{{name}}</h1>
-                <div class="author-content">
-                    {{#if bio}}
-                        <p>{{bio}}</p>
-                    {{else}}
-                        <p>{{{t "Read <a href='{url}'>more posts</a> by this author." url=(url)}}}</p>
+
+    {{#if cover_image}}
+    <style type="text/css">
+        .responsive-header-img {
+            background-image: url({{img_url cover_image size='l'}});
+        }
+        @media(max-width: 767px) {
+            .responsive-header-img {
+                background-image: url({{img_url cover_image size='m'}});
+                background-image: -webkit-image-set(
+                    url({{img_url cover_image size='m'}}) 1x,
+                    url({{img_url cover_image size='l'}}) 2x
+                );
+                background-image: image-set(
+                    url({{img_url cover_image size='m'}}) 1x,
+                    url({{img_url cover_image size='l'}}) 2x
+                );
+            }
+        }
+    </style>
+    {{/if}}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="intro {{#if cover_image}}responsive-header-img has-cover{{/if}}">
+                    {{#if profile_image}}
+                        <img src="{{img_url profile_image}}" alt="{{name}}" class="profile-image">
                     {{/if}}
-                    <div class="author-meta">
-                        <span class="social">
-                            {{#if twitter}}<a href="{{twitter_url}}" class="twitter" title="{{twitter}}" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a>{{/if}}
-                            {{#if facebook}}<a href="{{facebook_url}}" class="facebook" title="{{facebook}}" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>{{/if}}
-                        </span>
-                        {{#if website}}<span class="author-link"><a href="{{website}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-link" aria-hidden="true"></i> {{website}}</a></span>{{/if}}
-                        {{#if location}}<span class="author-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{location}}</span>{{/if}}
+                    <h1>{{name}}</h1>
+                    <div class="author-content">
+                        {{#if bio}}
+                            <p>{{bio}}</p>
+                        {{else}}
+                            <p>{{{t "Read <a href='{url}'>more posts</a> by this author." url=(url)}}}</p>
+                        {{/if}}
+                        <div class="author-meta">
+                            <span class="social">
+                                {{#if twitter}}<a href="{{twitter_url}}" class="twitter" title="{{twitter}}" target="_blank"><i class="fab fa-twitter" aria-hidden="true"></i></a>{{/if}}
+                                {{#if facebook}}<a href="{{facebook_url}}" class="facebook" title="{{facebook}}" target="_blank"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>{{/if}}
+                            </span>
+                            {{#if website}}<span class="author-link"><a href="{{website}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-link" aria-hidden="true"></i> {{website}}</a></span>{{/if}}
+                            {{#if location}}<span class="author-location"><i class="fa fa-map-marker" aria-hidden="true"></i> {{location}}</span>{{/if}}
+                        </div>
                     </div>
+                    <i class="line-t"></i> <i class="line-r"></i> <i class="line-b"></i> <i class="line-l"></i>
                 </div>
-                <i class="line-t"></i> <i class="line-r"></i> <i class="line-b"></i> <i class="line-l"></i>
             </div>
         </div>
     </div>
-</div>
+
 {{/author}}
 
 {{!-- The main content area --}}
