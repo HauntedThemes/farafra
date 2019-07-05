@@ -2,7 +2,7 @@
     "name": "farafra",
     "description": "In the menu today - a gourmet's theme. We got fat just by working on it. But hey, it you're not into food, it works with any other kind of imagery. Just make sure it's tasty enough.",
     "demo": "https://farafra.hauntedthemes.com/",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "license": "GNU General Public License, Version 2",
     "engines": {
         "ghost": ">=2.0.0",
